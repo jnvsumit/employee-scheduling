@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 
 public class EmployeesScheduleMapper {
+
     private static final Logger logger = Logger.getLogger(EmployeesScheduleMapper.class.getName());
 
 
