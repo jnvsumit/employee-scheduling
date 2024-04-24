@@ -28,7 +28,7 @@ public class EmployeesScheduleDTO {
     }
 
     public void setSkills(List<String> skills) {
-        Skills = skills;
+        skills = skills;
     }
 
     public void setSchedules(List<EmployeeScheduleDTO> schedules) {
@@ -44,7 +44,7 @@ public class EmployeesScheduleDTO {
     }
 
     public List<String> getSkills() {
-        return Skills;
+        return skills;
     }
 
     public List<EmployeeScheduleDTO> getSchedules() {
@@ -55,10 +55,10 @@ public class EmployeesScheduleDTO {
         this.name = name;
         this.position = position;
         this.domain = domain;
-        Skills = skills;
+        this.skills = skills;
         this.schedules = schedules;
     }
 
-    private List<String> Skills;
+    private List<String> skills;
     private List<EmployeeScheduleDTO> schedules;
 }

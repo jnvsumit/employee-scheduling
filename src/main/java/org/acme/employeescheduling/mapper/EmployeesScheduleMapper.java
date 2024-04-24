@@ -5,15 +5,20 @@ import org.acme.employeescheduling.dto.EmployeesScheduleDTO;
 import org.acme.employeescheduling.dto.ShiftDTO;
 import org.acme.employeescheduling.utils.DateTimeUtil;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
 
 public class EmployeesScheduleMapper {
+    private static final Logger logger = Logger.getLogger(EmployeesScheduleMapper.class.getName());
+
 
     public static EmployeeSchedule toEmployeeSchedule(List<EmployeesScheduleDTO> dtoE, List<ShiftDTO> dtoS) {
         return EmployeeSchedule
@@ -25,13 +30,17 @@ public class EmployeesScheduleMapper {
     }
 
     private static List<Availability> getAvailabilities(List<EmployeesScheduleDTO> dto) {
-        return dto.stream().map(e -> Availability
-                .builder()
-                .employee(getEmployee(e))
-                .startTime(getStartTime(e))
-                .endTime(getEndTime(e))
-                .availabilityOnDay(getAvailabilityOnDay(e))
-                .build()).collect(Collectors.toList());
+        return dto.stream().map(e -> {
+            logger.log(Level.INFO, "Converting EmployeesScheduleDTO to Employee: " + e.toString());
+
+            return Availability
+                    .builder()
+                    .employee(getEmployee(e))
+                    .startTime(getStartTime(e))
+                    .endTime(getEndTime(e))
+                    .availabilityOnDay(getAvailabilityOnDay(e))
+                    .build();
+        }).collect(Collectors.toList());
     }
 
     private static List<Employee> getEmployees(List<EmployeesScheduleDTO> dto) {
@@ -43,6 +52,10 @@ public class EmployeesScheduleMapper {
     }
 
     private static Employee getEmployee(EmployeesScheduleDTO dto) {
+      //  logger.info("Converting EmployeesScheduleDTO to Employee: " + dto);
+//        logger.log(Level.INFO, "Converting EmployeesScheduleDTO to Employee: " + dto.toString());
+
+
         return Employee
                 .builder()
                 .name(dto.getName())
