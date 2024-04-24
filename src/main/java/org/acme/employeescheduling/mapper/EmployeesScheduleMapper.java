@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 
 public class EmployeesScheduleMapper {
-
     public static EmployeeSchedule toEmployeeSchedule(List<EmployeesScheduleDTO> dtoE, List<ShiftDTO> dtoS) {
         return EmployeeSchedule
                 .builder()

@@ -18,6 +18,7 @@ public class DataService {
 
     public EmployeeSchedule getEmployeeSchedule() {
         try {
+            System.out.println("");
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
             List<ShiftDTO> shiftDTOS = getShifts();
             return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shiftDTOS);
