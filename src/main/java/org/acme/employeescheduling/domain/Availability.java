@@ -1,11 +1,11 @@
 package org.acme.employeescheduling.domain;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
+
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
+
 
 import ai.timefold.solver.core.api.domain.lookup.PlanningId;
 import lombok.Builder;
@@ -39,5 +39,12 @@ public class Availability {
     @Override
     public int hashCode() {
         return getId().hashCode();
+    }
+
+    public static String generateId(){
+
+        UUID uuid= UUID.randomUUID();
+
+        return String.valueOf(uuid);
     }
 }

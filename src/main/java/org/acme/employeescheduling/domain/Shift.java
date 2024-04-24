@@ -3,6 +3,7 @@ package org.acme.employeescheduling.domain;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
+import java.util.UUID;
 
 import ai.timefold.solver.core.api.domain.entity.PlanningEntity;
 import ai.timefold.solver.core.api.domain.lookup.PlanningId;
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @PlanningEntity(pinningFilter = ShiftPinningFilter.class)
 public class Shift {
+
     @PlanningId
     private String id;
 
@@ -49,5 +51,11 @@ public class Shift {
     @Override
     public int hashCode() {
         return getId().hashCode();
+    }
+    public static String generateId(){
+
+        UUID uuid= UUID.randomUUID();
+
+        return String.valueOf(uuid);
     }
 }

@@ -36,6 +36,7 @@ public class EmployeesScheduleMapper {
 
             return Availability
                     .builder()
+                    .id(Availability.generateId())
                     .employee(getEmployee(e))
                     .startTime(getStartTime(e))
                     .endTime(getEndTime(e))
@@ -69,6 +70,7 @@ public class EmployeesScheduleMapper {
     private static Shift getShift(ShiftDTO dto) {
         return Shift
                 .builder()
+                .id(Shift.generateId())
                 .start(DateTimeUtil.toLocalTime(dto.getRequiredShifts().get(0).getStartTime()))
                 .end(DateTimeUtil.toLocalTime(dto.getRequiredShifts().get(0).getEndTime()))
                 .storeName(StoreName.valueOf(dto.getStoreType()))
