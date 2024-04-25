@@ -71,7 +71,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 @Tag(name = "Demo data", description = "Data from resources folder")
-@Path("demo-data")
+@Path("get-data")
 public class EmployeeScheduleDemoResource {
 
     private final DataService dataService;
