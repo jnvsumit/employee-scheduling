@@ -23,19 +23,30 @@ public class Shift {
     @PlanningId
     private String id;
 
-    private LocalTime start;
-    private LocalTime end;
+    private String day;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
-    private StoreName storeName;
-    private Skill requiredSkill;
+    private String storeName;
+    private String requiredSkill;
 
     @PlanningVariable
     private Employee employee;
 
-    @Override
-    public String toString() {
-        return start + "-" + end;
+    public Shift(String day,LocalDateTime start, LocalDateTime end, String storeName, String requiredSkill) {
+        this.day = day;
+        this.start = start;
+        this.end = end;
+        this.storeName = storeName;
+        this.requiredSkill = requiredSkill;
     }
+
+
+
+//    @Override
+//    public String toString() {
+//        return start + "-" + end;
+//    }
 
     @Override
     public boolean equals(Object o) {

@@ -144,6 +144,126 @@
     ]
   },
   {
+    "name": "Ankit",
+    "position": "SALESMAN FRUIT",
+    "domain": "FRUIT",
+    "skills": [
+      "SELLER"
+    ],
+    "schedules": [
+      {
+        "schedule": [
+          {
+            "days": [
+              "MO",
+              "TU",
+              "WE",
+              "TH",
+              "FR",
+              "SA"
+            ],
+            "start_time": "08:00",
+            "end_time": "10:00"
+          },
+          {
+            "days": [
+              "MO",
+              "TU",
+              "WE",
+              "TH",
+              "FR",
+              "SA"
+            ],
+            "start_time": "15:00",
+            "end_time": "22:00"
+          }
+        ]
+      },
+      {
+        "schedule": [
+          {
+            "days": [
+              "MO",
+              "FR",
+              "SA"
+            ],
+            "start_time": "08:00",
+            "end_time": "13:00"
+          },
+          {
+            "days": [
+              "TU",
+              "WE",
+              "TH"
+            ],
+            "start_time": "08:00",
+            "end_time": "12:15"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "PQR",
+    "position": "SALESMAN FRUIT",
+    "domain": "FRUIT",
+    "skills": [
+      "SELLER"
+    ],
+    "schedules": [
+      {
+        "schedule": [
+          {
+            "days": [
+              "MO",
+              "TU",
+              "WE",
+              "TH",
+              "FR",
+              "SA"
+            ],
+            "start_time": "08:00",
+            "end_time": "10:00"
+          },
+          {
+            "days": [
+              "MO",
+              "TU",
+              "WE",
+              "TH",
+              "FR",
+              "SA"
+            ],
+            "start_time": "15:00",
+            "end_time": "22:00"
+          }
+        ]
+      },
+      {
+        "schedule": [
+          {
+            "days": [
+              "MO",
+              "FR",
+              "SA"
+            ],
+            "start_time": "08:00",
+            "end_time": "13:00"
+          },
+          {
+            "days": [
+              "TU",
+              "WE",
+              "TH"
+            ],
+            "start_time": "08:00",
+            "end_time": "12:15"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "name": "IRF",
     "position": "SALESMAN MEAT",
     "domain": "MEAT",

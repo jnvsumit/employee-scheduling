@@ -35,7 +35,7 @@ public class ScheduleState {
         return !isHistoric(dateTime) && !isDraft(dateTime);
     }
 
-    @JsonIgnore
+    /*@JsonIgnore
     public boolean isHistoric(Shift shift) {
         return isHistoric(shift.getStart());
     }
@@ -48,7 +48,7 @@ public class ScheduleState {
     @JsonIgnore
     public boolean isPublished(Shift shift) {
         return isPublished(shift.getStart());
-    }
+    }*/
 
     @JsonIgnore
     public LocalDate getFirstPublishedDate() {

@@ -1,7 +1,7 @@
 package org.acme.employeescheduling.domain;
 
 import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import ai.timefold.solver.core.api.domain.lookup.PlanningId;
 import lombok.Builder;
