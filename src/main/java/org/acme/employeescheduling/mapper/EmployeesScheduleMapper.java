@@ -67,7 +67,7 @@ public class EmployeesScheduleMapper {
 
         logger.info("Scheduless------: " + dto.getSchedules().stream()
                 .flatMap(scheduleDTO -> scheduleDTO.getSchedule().stream().toList().stream())+"\n");
-//        logger.log(Level.INFO, "Employee schedule 1: " + dto.getSchedules().get(0));
+        logger.log(Level.INFO, "Employee schedule 1: " + dto.getSchedules().get(0));
 //        logger.log(Level.INFO, "Employee schedule 2: " + dto.getSchedules().get(1).toString());
 
 //        logger.log(Level.INFO, "Employee: " + dto.getSchedules().get(0).getSchedule().get(1).toString());
