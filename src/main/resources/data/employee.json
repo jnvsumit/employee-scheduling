@@ -103,7 +103,7 @@
               "SA"
             ],
             "start_time": "08:00",
-            "end_time": "10:00"
+            "end_time": "15:00"
           },
           {
             "days": [
@@ -118,26 +118,42 @@
             "end_time": "22:00"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "name": "Rahul",
+    "position": "SALESMAN FRUIT",
+    "domain": "FRUIT",
+    "skills": [
+      "SELLER"
+    ],
+    "schedules": [
       {
         "schedule": [
           {
             "days": [
               "MO",
+              "TU",
+              "WE",
+              "TH",
               "FR",
               "SA"
             ],
             "start_time": "08:00",
-            "end_time": "13:00"
+            "end_time": "15:00"
           },
           {
             "days": [
+              "MO",
               "TU",
               "WE",
-              "TH"
+              "TH",
+              "FR",
+              "SA"
             ],
-            "start_time": "08:00",
-            "end_time": "12:15"
+            "start_time": "15:00",
+            "end_time": "22:00"
           }
         ]
       }
@@ -163,7 +179,7 @@
               "SA"
             ],
             "start_time": "08:00",
-            "end_time": "10:00"
+            "end_time": "13:00"
           },
           {
             "days": [
@@ -176,28 +192,6 @@
             ],
             "start_time": "15:00",
             "end_time": "22:00"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          },
-          {
-            "days": [
-              "TU",
-              "WE",
-              "TH"
-            ],
-            "start_time": "08:00",
-            "end_time": "12:15"
           }
         ]
       }
@@ -223,7 +217,7 @@
               "SA"
             ],
             "start_time": "08:00",
-            "end_time": "10:00"
+            "end_time": "15:00"
           },
           {
             "days": [
@@ -236,28 +230,6 @@
             ],
             "start_time": "15:00",
             "end_time": "22:00"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          },
-          {
-            "days": [
-              "TU",
-              "WE",
-              "TH"
-            ],
-            "start_time": "08:00",
-            "end_time": "12:15"
           }
         ]
       }
@@ -295,28 +267,7 @@
               "SA"
             ],
             "start_time": "08:00",
-            "end_time": "10:00"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          },
-          {
-            "days": [
-              "TU",
-              "TH"
-            ],
-            "start_time": "08:00",
-            "end_time": "12:15"
+            "end_time": "15:00"
           }
         ]
       },
@@ -367,27 +318,6 @@
           {
             "days": [
               "MO",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          },
-          {
-            "days": [
-              "TU",
-              "TH"
-            ],
-            "start_time": "08:00",
-            "end_time": "12:15"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MO",
               "TU",
               "WE",
               "TH",
@@ -430,27 +360,6 @@
           {
             "days": [
               "MO",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          },
-          {
-            "days": [
-              "TU",
-              "TH"
-            ],
-            "start_time": "08:00",
-            "end_time": "12:15"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MO",
               "TU",
               "WE",
               "TH",
@@ -458,7 +367,7 @@
               "SA"
             ],
             "start_time": "08:00",
-            "end_time": "10:00"
+            "end_time": "13:00"
           }
         ]
       }

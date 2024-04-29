@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Builder
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Schedule {
     public LocalTime getStartTime() {
         return startTime;

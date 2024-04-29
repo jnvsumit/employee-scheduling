@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class ShiftDTO {
 
+    @SerializedName("day")
+    private String day;
     @SerializedName("name")
     private String name;
 

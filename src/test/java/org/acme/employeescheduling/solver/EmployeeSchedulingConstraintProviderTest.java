@@ -4,17 +4,15 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.inject.Inject;
 
 import ai.timefold.solver.test.api.score.stream.ConstraintVerifier;
 
-import org.acme.employeescheduling.domain.Availability;
+import org.acme.employeescheduling.domain.*;
 //import org.acme.employeescheduling.domain.AvailabilityType;
-import org.acme.employeescheduling.domain.Employee;
-import org.acme.employeescheduling.domain.EmployeeSchedule;
-import org.acme.employeescheduling.domain.Shift;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -46,6 +44,33 @@ class EmployeeSchedulingConstraintProviderTest {
                 .penalizes(0);
     }
 
+    @Test
+    void testMatchShiftStartTimeWithEmployeeAvailability() {
+        // Create employees with different availabilities
+        Employee employee1 = new Employee("John", Set.of(), null, List.of(new Schedule(LocalTime.of(8, 0), LocalTime.of(15, 0))));
+        Employee employee2 = new Employee("Alice", Set.of(), null, List.of(new Schedule(LocalTime.of(12, 0), LocalTime.of(20, 0))));
+
+        // Shifts with start times matching and not matching employees' availabilities
+        LocalDateTime matchingStartTime = LocalDate.now().atTime(LocalTime.of(8, 0));
+        LocalDateTime nonMatchingStartTime = LocalDate.now().atTime(LocalTime.of(10, 0));
+
+        // Verify constraint behavior
+        constraintVerifier.verifyThat(EmployeeSchedulingConstraintProvider::matchShiftStartTimeWithEmployeeAvailability)
+                .given(employee1, new Shift("1", matchingStartTime, matchingStartTime.plusHours(8), "Location", "Skill", employee1))
+                .penalizes(0);
+
+        constraintVerifier.verifyThat(EmployeeSchedulingConstraintProvider::matchShiftStartTimeWithEmployeeAvailability)
+                .given(employee1, new Shift("2", nonMatchingStartTime, nonMatchingStartTime.plusHours(8), "Location", "Skill", employee1))
+                .penalizes(1);
+
+        constraintVerifier.verifyThat(EmployeeSchedulingConstraintProvider::matchShiftStartTimeWithEmployeeAvailability)
+                .given(employee2, new Shift("3", matchingStartTime, matchingStartTime.plusHours(8), "Location", "Skill", employee2))
+                .penalizes(0);
+
+        constraintVerifier.verifyThat(EmployeeSchedulingConstraintProvider::matchShiftStartTimeWithEmployeeAvailability)
+                .given(employee2, new Shift("4", nonMatchingStartTime, nonMatchingStartTime.plusHours(8), "Location", "Skill", employee2))
+                .penalizes(1);
+    }
     @Test
     void testOverlappingShifts() {
         Employee employee1 = new Employee("Amy", Set.of("Skill"));

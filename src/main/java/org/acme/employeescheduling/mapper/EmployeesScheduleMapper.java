@@ -5,6 +5,7 @@ import org.acme.employeescheduling.dto.EmployeesScheduleDTO;
 import org.acme.employeescheduling.dto.ShiftDTO;
 import org.acme.employeescheduling.utils.DateTimeUtil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,16 +63,28 @@ public class EmployeesScheduleMapper {
     }
 */
     private static Employee getEmployee(EmployeesScheduleDTO dto) {
-      //  logger.info("Converting EmployeesScheduleDTO to Employee: " + dto);
-//        logger.log(Level.INFO, "Converting EmployeesScheduleDTO to Employee: " + dto.toString());
 
+
+        logger.info("Scheduless------: " + dto.getSchedules().stream()
+                .flatMap(scheduleDTO -> scheduleDTO.getSchedule().stream().toList().stream())+"\n");
+//        logger.log(Level.INFO, "Employee schedule 1: " + dto.getSchedules().get(0));
+//        logger.log(Level.INFO, "Employee schedule 2: " + dto.getSchedules().get(1).toString());
+
+//        logger.log(Level.INFO, "Employee: " + dto.getSchedules().get(0).getSchedule().get(1).toString());
+
+
+List<Schedule> availabilities = new ArrayList<>();
+availabilities.add(new Schedule(DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getStartTime()),DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getEndTime())));
+if(dto.getSchedules().size()>1){
+    availabilities.add(new Schedule(DateTimeUtil.toLocalTime(dto.getSchedules().get(1).getSchedule().get(0).getStartTime()),DateTimeUtil.toLocalTime(dto.getSchedules().get(1).getSchedule().get(0).getEndTime())));
+}
 
         return Employee
                 .builder()
                 .name(dto.getName())
                 .skills(new HashSet<>(dto.getSkills()))
                 .domain(StoreName.valueOf(dto.getDomain()))
-//                .availabilities(dto.getSchedules().)
+                .availabilities(availabilities)
                 .build();
     }
 
@@ -107,12 +120,8 @@ public class EmployeesScheduleMapper {
     }
 
     private static Set<AvailabilityOnDay> getAvailabilityOnDay(EmployeesScheduleDTO dto) {
-        logger.log(Level.INFO,"employees schedule dto-------"+dto);
-        logger.log(Level.INFO,"========"+dto.getSchedules().stream()
-                .flatMap(scheduleDTO -> scheduleDTO.getSchedule().stream())
-                .flatMap(shiftDTO -> shiftDTO.getDays().stream())
-                .map(AvailabilityOnDay::valueOf)
-                .collect(Collectors.toSet()));
+//        logger.log(Level.INFO,"employees schedule dto-------"+dto);
+
 //        return dto.getSchedules().get(0).getSchedule().get(0).getDays().stream().map(AvailabilityOnDay::valueOf).collect(Collectors.toSet());
         return dto.getSchedules().stream()
                 .flatMap(scheduleDTO -> scheduleDTO.getSchedule().stream())

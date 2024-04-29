@@ -36,8 +36,8 @@
     "store_type": "APNA",
     "required_shifts": [
       {
-        "start_time": "09:00",
-        "end_time": "16:00",
+        "start_time": "08:00",
+        "end_time": "15:00",
         "employee_count": 2,
         "required_skills": [
           {

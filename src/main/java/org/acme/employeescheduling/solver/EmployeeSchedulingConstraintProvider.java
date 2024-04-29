@@ -33,24 +33,23 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                 atLeast10HoursBetweenTwoShifts(constraintFactory),
                 oneShiftPerDay(constraintFactory),
                 noOverlappingShifts(constraintFactory),
+                matchShiftStartTimeWithEmployeeAvailability(constraintFactory)
         };
     }
 
-    /*Constraint matchEmployeeStartTime(ConstraintFactory constraintFactory) {
+    Constraint matchShiftStartTimeWithEmployeeAvailability(ConstraintFactory constraintFactory) {
         return constraintFactory.forEach(Shift.class)
                 .filter(shift -> {
-                    // Get the shift's start time
+                    // Retrieve the start time of the shift
                     LocalTime shiftStartTime = shift.getStart().toLocalTime();
-                    // Check if the shift's start time falls within any of the employee's available start time ranges
+                    // Check if any availability of the employee matches the shift start time
                     return shift.getEmployee().getAvailabilities().stream()
                             .anyMatch(availability ->
-                                    shiftStartTime.compareTo(LocalTime.parse(availability.getStartTime())) >= 0 &&
-                                            shiftStartTime.compareTo(LocalTime.parse(availability.getEndTime())) <= 0);
+                                    availability.getStartTime().equals(shiftStartTime));
                 })
                 .penalize(HardSoftScore.ONE_HARD)
-                .asConstraint("Mismatched employee start time and shift start time");
-    }*/
-
+                .asConstraint("Shift start time doesn't match employee availability");
+    }
     Constraint noOverlappingShifts(ConstraintFactory constraintFactory) {
         return constraintFactory.forEachUniquePair(Shift.class, Joiners.equal(Shift::getEmployee),
                         Joiners.overlapping(Shift::getStart, Shift::getEnd))
