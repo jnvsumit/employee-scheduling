@@ -1,7 +1,10 @@
 package org.acme.employeescheduling.dto;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class EmployeeDTO {
     private String name;
     private String position;

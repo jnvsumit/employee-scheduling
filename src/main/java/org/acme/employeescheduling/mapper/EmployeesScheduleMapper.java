@@ -5,6 +5,7 @@ import org.acme.employeescheduling.dto.EmployeesScheduleDTO;
 import org.acme.employeescheduling.dto.ShiftDTO;
 import org.acme.employeescheduling.utils.DateTimeUtil;
 
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.time.LocalDateTime;
@@ -48,6 +49,8 @@ public class EmployeesScheduleMapper {
     }
 
     public static List<Employee> getEmployees(List<EmployeesScheduleDTO> dto) {
+        logger.log(Level.INFO, "EmployeesScheduleDTO to Employee: " + dto.stream().map(EmployeesScheduleMapper::getEmployee).collect(Collectors.toList()));
+
         return dto.stream().map(EmployeesScheduleMapper::getEmployee).collect(Collectors.toList());
     }
 
@@ -66,8 +69,9 @@ public class EmployeesScheduleMapper {
         return Employee
                 .builder()
                 .name(dto.getName())
-                .skills(dto.getSkills().stream().map(Skill::valueOf).collect(Collectors.toSet()))
+                .skills(new HashSet<>(dto.getSkills()))
                 .domain(StoreName.valueOf(dto.getDomain()))
+//                .availabilities(dto.getSchedules().)
                 .build();
     }
 

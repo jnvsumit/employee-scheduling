@@ -27,18 +27,27 @@ public class Shift {
     private LocalDateTime start;
     private LocalDateTime end;
 
-    private String storeName;
+    private String storeType;
     private String requiredSkill;
 
     @PlanningVariable
     private Employee employee;
 
-    public Shift(String day,LocalDateTime start, LocalDateTime end, String storeName, String requiredSkill) {
+    public Shift(String day,LocalDateTime start, LocalDateTime end, String storeType, String requiredSkill) {
         this.day = day;
         this.start = start;
         this.end = end;
-        this.storeName = storeName;
+        this.storeType = storeType;
         this.requiredSkill = requiredSkill;
+    }
+
+    public Shift(String id, LocalDateTime start, LocalDateTime end, String storeType, String requiredSkill, Employee employee) {
+        this.id = id;
+        this.start = start;
+        this.end = end;
+        this.storeType = storeType;
+        this.requiredSkill = requiredSkill;
+        this.employee = employee;
     }
 
 

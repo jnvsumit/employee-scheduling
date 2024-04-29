@@ -33,10 +33,6 @@ public class Main {
 
 
 
-        // Use Gson to map JSON data to DTOs
-
-
-        // Now you have a list of Store objects
     }
 
      public static List<Shift> getShifts(){
@@ -82,6 +78,7 @@ public class Main {
 //                 System.out.println("No suitable employee found for shift on " + shift.getDay());
 //             }
 //         }
+
          return allShifts;
      }
 
@@ -147,7 +144,7 @@ public class Main {
                 for(RequiredSkill requiredSkill:requiredShift.getRequiredSkills()){
                     int employeeCount = requiredSkill.getMinimumEmployeeCount();
                     for(int i=0;i<employeeCount;i++){
-                        allShifts.add(new Shift(day, startDateTime,endDateTime,department.getName(),requiredSkill.getSkillName()));
+                        allShifts.add(new Shift(day, startDateTime,endDateTime,department.getStoreType(),requiredSkill.getSkillName()));
 
                     }
 

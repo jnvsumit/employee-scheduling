@@ -4,18 +4,29 @@ import java.util.Objects;
 import java.util.*;
 
 import ai.timefold.solver.core.api.domain.lookup.PlanningId;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
     @PlanningId
     private String name;
 
-    private Set<Skill> skills;
+    private Set<String> skills;
 
     private StoreName domain;
+    private List<Schedule> availabilities;
+
+
+    public Employee(String name, Set<String> skills) {
+        this.name = name;
+        this.skills = skills;
+    }
 
     @Override
     public String toString() {
