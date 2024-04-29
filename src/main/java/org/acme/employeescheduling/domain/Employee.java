@@ -22,6 +22,10 @@ public class Employee {
     private StoreName domain;
     private List<Schedule> availabilities;
 
+    public Employee(String name, StoreName domain) {
+        this.name = name;
+        this.domain = domain;
+    }
 
     public Employee(String name, Set<String> skills) {
         this.name = name;

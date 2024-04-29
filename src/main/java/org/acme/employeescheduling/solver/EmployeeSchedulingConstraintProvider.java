@@ -30,6 +30,7 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
     public Constraint[] defineConstraints(ConstraintFactory constraintFactory) {
         return new Constraint[]{
                 requiredSkill(constraintFactory),
+//                requiredDomain(constraintFactory),
                 atLeast10HoursBetweenTwoShifts(constraintFactory),
                 oneShiftPerDay(constraintFactory),
                 noOverlappingShifts(constraintFactory),
@@ -64,6 +65,12 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                 .penalize(HardSoftScore.ONE_HARD)
                 .asConstraint("Missing required skill");
     }
+//    Constraint requiredDomain(ConstraintFactory constraintFactory) {
+//        return constraintFactory.forEach(Shift.class)
+//                .filter(shift -> !shift.getEmployee().getDomain().equals(shift.getStoreType()))
+//                .penalize(HardSoftScore.ONE_HARD)
+//                .asConstraint("Domain does not match");
+//    }
 
     Constraint atLeast10HoursBetweenTwoShifts(ConstraintFactory constraintFactory) {
         return constraintFactory.forEachUniquePair(Shift.class,
