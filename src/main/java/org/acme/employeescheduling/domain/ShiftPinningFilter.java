@@ -9,7 +9,7 @@ public class ShiftPinningFilter implements PinningFilter<EmployeeSchedule, Shift
     @Override
     public boolean accept(EmployeeSchedule employeeSchedule, Shift shift) {
         ScheduleState scheduleState = employeeSchedule.getScheduleState();
-        if (Objects.nonNull(scheduleState)) return !scheduleState.isDraft(shift);
+//        if (Objects.nonNull(scheduleState)) return !scheduleState.isDraft(shift);
         return false;
     }
 }

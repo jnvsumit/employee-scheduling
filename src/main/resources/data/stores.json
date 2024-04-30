@@ -2,48 +2,85 @@
   {
     "name": "FRUIT STORE",
     "store_type": "FRUIT",
-    "required_skills": [
-      {
-        "skill_name": "MANAGER",
-        "minimum_employee_count": 1
-      },
-      {
-        "skill_name": "SELLER",
-        "minimum_employee_count": 3
-      }
-    ],
     "required_shifts": [
       {
         "start_time": "08:00",
-        "end_time": "15:00"
+        "end_time": "15:00",
+        "employee_count": 2,
+        "required_skills": [
+          {
+            "skill_name": "MANAGER",
+            "minimum_employee_count": 1
+          },
+          {
+            "skill_name": "SELLER",
+            "minimum_employee_count": 1
+          }
+        ]
       },
       {
         "start_time": "15:00",
-        "end_time": "22:00"
+        "end_time": "22:00",
+        "employee_count": 2,
+        "required_skills": [
+          {
+            "skill_name": "SELLER",
+            "minimum_employee_count": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "APNA STORE",
+    "store_type": "APNA",
+    "required_shifts": [
+      {
+        "start_time": "08:00",
+        "end_time": "15:00",
+        "employee_count": 2,
+        "required_skills": [
+          {
+            "skill_name": "ENGINEER",
+            "minimum_employee_count": 1
+          },
+          {
+            "skill_name": "DEVELOPER",
+            "minimum_employee_count": 1
+          }
+        ]
       }
     ]
   },
   {
     "name": "MEAT STORE",
     "store_type": "MEAT",
-    "required_skills": [
-      {
-        "skill_name": "MANAGER",
-        "minimum_employee_count": 1
-      },
-      {
-        "skill_name": "SELLER",
-        "minimum_employee_count": 2
-      }
-    ],
     "required_shifts": [
       {
         "start_time": "08:00",
-        "end_time": "15:00"
+        "end_time": "15:00",
+        "employee_count": 2,
+        "required_skills": [
+          {
+            "skill_name": "MANAGER",
+            "minimum_employee_count": 1
+          },
+          {
+            "skill_name": "SELLER",
+            "minimum_employee_count": 1
+          }
+        ]
       },
       {
         "start_time": "15:00",
-        "end_time": "22:00"
+        "end_time": "22:00",
+        "employee_count": 2,
+        "required_skills": [
+          {
+            "skill_name": "SELLER",
+            "minimum_employee_count": 2
+          }
+        ]
       }
     ]
   }
