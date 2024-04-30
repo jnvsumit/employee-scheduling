@@ -72,7 +72,6 @@ public class EmployeesScheduleMapper {
 
 //        logger.log(Level.INFO, "Employee: " + dto.getSchedules().get(0).getSchedule().get(1).toString());
 
-
 List<Schedule> availabilities = new ArrayList<>();
 availabilities.add(new Schedule(DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getStartTime()),DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getEndTime())));
 if(dto.getSchedules().size()>1){

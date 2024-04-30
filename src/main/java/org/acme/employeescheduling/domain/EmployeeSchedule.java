@@ -11,6 +11,7 @@ import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
 import ai.timefold.solver.core.api.solver.SolverStatus;
 import lombok.*;
 
+@Setter
 @Data
 @PlanningSolution
 @Builder
@@ -47,27 +48,4 @@ public class EmployeeSchedule {
         this.solverStatus = solverStatus;
     }
 
-    public void setScheduleState(ScheduleState scheduleState) {
-        this.scheduleState = scheduleState;
-    }
-
-    public void setAvailabilities(List<Availability> availabilities) {
-        this.availabilities = availabilities;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public void setShifts(List<Shift> shifts) {
-        this.shifts = shifts;
-    }
-
-    public void setScore(HardSoftScore score) {
-        this.score = score;
-    }
-
-    public void setSolverStatus(SolverStatus solverStatus) {
-        this.solverStatus = solverStatus;
-    }
 }
