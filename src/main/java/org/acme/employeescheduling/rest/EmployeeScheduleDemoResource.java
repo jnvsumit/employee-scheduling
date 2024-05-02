@@ -88,6 +88,8 @@ public class EmployeeScheduleDemoResource {
     @Operation(summary = "Find an unsolved demo schedule")
     @GET
     public Response getData() {
-        return Response.ok(dataService.getEmployeeSchedule()).build();
+//        return Response.ok(dataService.getEmployeeSchedule()).build();
+//        return Response.ok("").build();
+        return Response.ok().build();
     }
 }
