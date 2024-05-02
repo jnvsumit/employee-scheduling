@@ -18,7 +18,7 @@
               "FR",
               "SA"
             ],
-            "start_time": "08:00",
+            "start_time": "13:00",
             "end_time": "15:00"
           }
         ]
@@ -169,48 +169,6 @@
   },
   {
     "name": "Ankit",
-    "position": "SALESMAN FRUIT",
-    "domain": "FRUIT",
-    "skills": [
-      "SELLER"
-    ],
-    "schedules": [
-      {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "PQR",
     "position": "SALESMAN FRUIT",
     "domain": "FRUIT",
     "skills": [

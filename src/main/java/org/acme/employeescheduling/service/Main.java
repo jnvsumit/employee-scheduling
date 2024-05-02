@@ -18,6 +18,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -35,7 +36,7 @@ public class Main {
 
     }
 
-     public static List<Shift> getShifts(){
+     public static List<Shift> getShifts(LocalDate startDate, LocalDate endDate ){
          String jsonData = null;
          try {
              jsonData = DataUtil.getDataFromFile("data/stores.json");
@@ -48,18 +49,23 @@ public class Main {
          List<DepartmentDTO> storeDTOs = gson.fromJson(jsonData, storeListType);
          // Map DTOs to Store class
          List<Department> stores = mapToStores(storeDTOs);
-         LocalDate startDate = LocalDate.now()                 // Get the current date
-                 .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
+         logger.log(Level.INFO,"Start date "+startDate);
+         logger.log(Level.INFO,"End date "+endDate);
 
-         int initialRosterDays = 21;
+//         LocalDate startDate = LocalDate.now()                 // Get the current date
+//                 .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
+         long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+         logger.log(Level.INFO,"Days Between  "+daysBetween);
+
+//         int initialRosterDays = 21;
          List<Shift> allShifts = new LinkedList<>();
-         for(int i=0;i<initialRosterDays;i++){
+         for(int i=0;i<=daysBetween;i++){
 
              LocalDate date = startDate.plusDays(i);
              DayOfWeek dayOfWeek = date.getDayOfWeek();
              String dayOfWeekStr = dayOfWeek.toString();
              if(Objects.equals(dayOfWeekStr, "SUNDAY")){
-                 break;
+                 continue;
              }
              allShifts.addAll(generateShiftsForDay(stores,date,dayOfWeekStr));
          }
