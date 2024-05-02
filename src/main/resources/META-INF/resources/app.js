@@ -1,6 +1,8 @@
 let autoRefreshIntervalId = null;
 const zoomMin = 2 * 1000 * 60 * 60 * 24 // 2 day in milliseconds
-const zoomMax = 4 * 7 * 1000 * 60 * 60 * 24 // 4 weeks in milliseconds
+const zoomMax = 4 * 7 * 1000 * 60 * 60 * 24 // 4 weeks in milliseconds;
+let startDate;
+let endDate;
 
 let demoDataId = null;
 let scheduleId = null;
@@ -70,10 +72,20 @@ $(document).ready(function () {
     $("#byLocationTab").on('shown.bs.tab', function (event) {
         byLocationTimeline.redraw();
     })
+    $("#startDate").change(function(){
+        // Get the selected date value
+        startDate = $(this).val();
+      });
+    $("#endDate").change(function(){
+        // Get the selected date value
+        endDate = $(this).val();
+      });
 
     setupAjax();
    // fetchDemoData();
 });
+
+console.log("end date===> ",endDate);
 
 function setupAjax() {
     $.ajaxSetup({
@@ -300,6 +312,13 @@ function renderSchedule(schedule) {
 }
 
 function solve() {
+    console.log({startDate,endDate})
+    if(!loadedSchedule){
+        loadedSchedule = {startDate,endDate}
+    }else{
+        loadedSchedule.startDate=startDate;
+        loadedSchedule.endDate=endDate;
+    }
     $.post("/schedules", JSON.stringify(loadedSchedule), function (data) {
         scheduleId = data;
         refreshSolvingButtons(true);

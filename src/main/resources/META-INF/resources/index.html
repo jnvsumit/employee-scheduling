@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/webjars/font-awesome/css/all.css"/>
     <link rel="stylesheet" href="/webjars/timefold/css/timefold-webui.css"/>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="index.css">
     <style>
         .vis-time-axis .vis-grid.vis-saturday,
         .vis-time-axis .vis-grid.vis-sunday {
@@ -32,6 +34,17 @@
         <p>Generate the optimal schedule for your employees.</p>
 
         <div class="mb-4">
+            <div id="dateParentBox">
+
+                <div class="dateChildBox">
+                    <label for="startDate">Start Date :</label>
+                    <input id="startDate" type="date">
+                </div>
+                <div class="dateChildBox">
+                    <label for="endDate">End Date :</label>
+                    <input id="endDate" type="date">
+                </div>
+            </div>
             <button id="solveButton" type="button" class="btn btn-success">
                 <span class="fas fa-play"></span> Solve
             </button>
