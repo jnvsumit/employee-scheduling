@@ -1,96 +1,134 @@
 <html lang="en">
-<head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Employee scheduling - Timefold Quarkus</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.2/styles/vis-timeline-graph2d.min.css"
-          integrity="sha256-svzNasPg1yR5gvEaRei2jg+n4Pc3sVyMUWeS6xRAh6U=" crossorigin="anonymous">
-    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/webjars/font-awesome/css/all.css"/>
-    <link rel="stylesheet" href="/webjars/timefold/css/timefold-webui.css"/>
-    <link rel="stylesheet" href="./index.css">
-    <link rel="stylesheet" href="index.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.2/styles/vis-timeline-graph2d.min.css"
+      integrity="sha256-svzNasPg1yR5gvEaRei2jg+n4Pc3sVyMUWeS6xRAh6U="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/font-awesome/css/all.css" />
+    <link rel="stylesheet" href="/webjars/timefold/css/timefold-webui.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
     <style>
-        .vis-time-axis .vis-grid.vis-saturday,
-        .vis-time-axis .vis-grid.vis-sunday {
-            background: #D3D7CFFF;
-        }
+      .vis-time-axis .vis-grid.vis-saturday,
+      .vis-time-axis .vis-grid.vis-sunday {
+        background: #d3d7cfff;
+      }
     </style>
-    <link rel="icon" href="/webjars/timefold/img/timefold-favicon.svg" type="image/svg+xml">
-</head>
+    <link
+      rel="icon"
+      href="/webjars/timefold/img/timefold-favicon.svg"
+      type="image/svg+xml"
+    />
+  </head>
 
-<body>
-<!--<header id="timefold-auto-header">-->
-<!--    &lt;!&ndash; Filled in by app.js &ndash;&gt;-->
-<!--</header>-->
-<div class="tab-content">
-    <div id="demo" class="tab-pane fade show active container-fluid">
-        <div class="sticky-top d-flex justify-content-center align-items-center" aria-live="polite"
-             aria-atomic="true">
-            <div id="notificationPanel" style="position: absolute; top: .5rem;"></div>
+  <body>
+    <!--<header id="timefold-auto-header">-->
+    <!--    &lt;!&ndash; Filled in by app.js &ndash;&gt;-->
+    <!--</header>-->
+    <div class="tab-content">
+      <div id="demo" class="tab-pane fade show active container-fluid">
+        <div
+          class="sticky-top d-flex justify-content-center align-items-center"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <div
+            id="notificationPanel"
+            style="position: absolute; top: 0.5rem"
+          ></div>
         </div>
         <h1>Employee scheduling solver</h1>
         <p>Generate the optimal schedule for your employees.</p>
 
         <div class="mb-4">
-            <div id="dateParentBox">
-
-                <div class="dateChildBox">
-                    <label for="startDate">Start Date :</label>
-                    <input id="startDate" type="date">
-                </div>
-                <div class="dateChildBox">
-                    <label for="endDate">End Date :</label>
-                    <input id="endDate" type="date">
-                </div>
+          <div id="dateParentBox">
+            <div class="dateChildBox">
+              <label for="startDate">Start Date :</label>
+              <input id="startDate" type="date" placeholder="Choose start date" required />
             </div>
-            <button id="solveButton" type="button" class="btn btn-success">
-                <span class="fas fa-play"></span> Solve
-            </button>
-            <button id="stopSolvingButton" type="button" class="btn btn-danger">
-                <span class="fas fa-stop"></span> Stop solving
-            </button>
-            <button id="publish" type="button" class="btn btn-primary">
+            <div class="dateChildBox">
+              <label for="endDate">End Date :</label>
+              <input id="endDate" type="date" placeholder="Choose end date" required />
+            </div>
+          </div>
+          <button id="solveButton" type="button" class="btn btn-success">
+            <span class="fas fa-play"></span> Generate Schedule
+          </button>
+          <button id="stopSolvingButton" type="button" class="btn btn-danger">
+            <span class="fas fa-stop"></span> Stop generating
+          </button>
+          <!-- <button id="publish" type="button" class="btn btn-primary">
                 <span class="fas fa-refresh"></span> Publish
-            </button>
-            <span id="unassignedShifts" class="ms-2 align-middle fw-bold"></span>
-            <span id="score" class="score ms-2 align-middle fw-bold">Score: ?</span>
+            </button> -->
+          <!-- <span id="unassignedShifts" class="ms-2 align-middle fw-bold"></span> -->
+          <!-- <span id="score" class="score ms-2 align-middle fw-bold">Score: ?</span> -->
 
-            <div class="float-end">
-                <ul class="nav nav-pills" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="byLocationTab" data-bs-toggle="tab"
-                                data-bs-target="#byLocationPanel" type="button" role="tab"
-                                aria-controls="byLocationPanel" aria-selected="true">By department
-                        </button>
-                    </li>
-<!--                    <li class="nav-item" role="presentation">-->
-<!--                        <button class="nav-link" id="byEmployeeTab" data-bs-toggle="tab"-->
-<!--                                aria-controls="byLocationPanel" aria-selected="true">By department-->
-<!--                            </button>-->
-<!--                        </li>-->
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="byEmployeeTab" data-bs-toggle="tab"
-                                data-bs-target="#byEmployeePanel" type="button" role="tab"
-                                aria-controls="byEmployeePanel" aria-selected="false">By Employee
-                        </button>
-                    </li>
-                </ul>
-            </div>
+          <div class="float-end">
+            <ul class="nav nav-pills" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="byLocationTab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#byLocationPanel"
+                  type="button"
+                  role="tab"
+                  aria-controls="byLocationPanel"
+                  aria-selected="true"
+                >
+                  By department
+                </button>
+              </li>
+              <!--                    <li class="nav-item" role="presentation">-->
+              <!--                        <button class="nav-link" id="byEmployeeTab" data-bs-toggle="tab"-->
+              <!--                                aria-controls="byLocationPanel" aria-selected="true">By department-->
+              <!--                            </button>-->
+              <!--                        </li>-->
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="byEmployeeTab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#byEmployeePanel"
+                  type="button"
+                  role="tab"
+                  aria-controls="byEmployeePanel"
+                  aria-selected="false"
+                >
+                  By Employee
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="mb-4 tab-content">
-            <div class="tab-pane fade show active" id="byLocationPanel" role="tabpanel"
-                 aria-labelledby="byLocationTab">
-                <div id="locationVisualization"></div>
-            </div>
-            <div class="tab-pane fade" id="byEmployeePanel" role="tabpanel" aria-labelledby="byEmployeeTab">
-                <div id="employeeVisualization"></div>
-            </div>
+          <div
+            class="tab-pane fade show active"
+            id="byLocationPanel"
+            role="tabpanel"
+            aria-labelledby="byLocationTab"
+          >
+            <div id="locationVisualization"></div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="byEmployeePanel"
+            role="tabpanel"
+            aria-labelledby="byEmployeeTab"
+          >
+            <div id="employeeVisualization"></div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div id="rest" class="tab-pane fade  container-fluid">
+      <div id="rest" class="tab-pane fade container-fluid">
         <h1>REST API Guide</h1>
 
         <h2>Employee Scheduling solver integration via cURL</h2>
@@ -103,7 +141,10 @@
     </pre>
 
         <h3>2. Post the sample data for solving</h3>
-        <p>The POST operation returns a <code>jobId</code> that should be used in subsequent commands.</p>
+        <p>
+          The POST operation returns a <code>jobId</code> that should be used in
+          subsequent commands.
+        </p>
         <pre>
             <button class="btn btn-outline-dark btn-sm float-end"
                     onclick="copyTextToClipboard('curl2')">Copy</button>
@@ -130,24 +171,32 @@
                     onclick="copyTextToClipboard('curl5')">Copy</button>
             <code id="curl5">curl -X DELETE -H 'Accept:application/json' http://localhost:8080/schedules/{id}</code>
     </pre>
-    </div>
+      </div>
 
-    <div id="openapi" class="tab-pane fade container-fluid">
+      <div id="openapi" class="tab-pane fade container-fluid">
         <h1>REST API Reference</h1>
         <div class="ratio ratio-1x1">
-            <!-- "scrolling" attribute is obsolete, but e.g. Chrome does not support "overflow:hidden" -->
-            <iframe src="/q/swagger-ui" style="overflow:hidden;" scrolling="no"></iframe>
+          <!-- "scrolling" attribute is obsolete, but e.g. Chrome does not support "overflow:hidden" -->
+          <iframe
+            src="/q/swagger-ui"
+            style="overflow: hidden"
+            scrolling="no"
+          ></iframe>
         </div>
+      </div>
     </div>
-</div>
-<footer id="timefold-auto-footer"></footer>
+    <footer id="timefold-auto-footer"></footer>
 
-<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/js-joda/dist/js-joda.min.js"></script>
-<script src="/webjars/timefold/js/timefold-webui.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.2/standalone/umd/vis-timeline-graph2d.min.js"
-        integrity="sha256-Jy2+UO7rZ2Dgik50z3XrrNpnc5+2PAx9MhL2CicodME=" crossorigin="anonymous"></script>
-<script src="/app.js"></script>
-</body>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/js-joda/dist/js-joda.min.js"></script>
+    <script src="/webjars/timefold/js/timefold-webui.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/vis-timeline@7.7.2/standalone/umd/vis-timeline-graph2d.min.js"
+      integrity="sha256-Jy2+UO7rZ2Dgik50z3XrrNpnc5+2PAx9MhL2CicodME="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <script src="/app.js"></script>
+  </body>
 </html>
