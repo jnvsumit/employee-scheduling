@@ -6,14 +6,11 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -38,12 +35,14 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 @Tag(name = "Employee Schedules", description = "Employee Schedules service for assigning employees to shifts.")
 @Path("schedules")
 public class EmployeeScheduleResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeScheduleResource.class);
 
+    ObjectMapper objectMapper = new ObjectMapper();
     public static final String SINGLETON_SCHEDULE_ID = "1";
 
     private final DataService dataService;
@@ -86,8 +85,16 @@ public class EmployeeScheduleResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces(MediaType.TEXT_PLAIN)
-    public String solve() {
-        EmployeeSchedule problem = dataService.getEmployeeSchedule();
+    public String solve(String payload) throws JsonProcessingException {
+        JsonNode jsonNode = objectMapper.readTree(payload);
+
+        String startDateString = jsonNode.get("startDate").asText();
+        String endDateString = jsonNode.get("endDate").asText();
+
+
+        LocalDate startDate = LocalDate.parse(startDateString);
+        LocalDate endDate = LocalDate.parse(endDateString);
+        EmployeeSchedule problem = dataService.getEmployeeSchedule(startDate,endDate);
         String jobId = UUID.randomUUID().toString();
         jobIdToJob.put(jobId, Job.ofSchedule(problem));
         solverManager.solveBuilder()
@@ -120,6 +127,7 @@ public class EmployeeScheduleResource {
     @Path("{jobId}")
     public EmployeeSchedule getEmployeeSchedule(
             @Parameter(description = "The job ID returned by the POST method.") @PathParam("jobId") String jobId) {
+
         EmployeeSchedule schedule = getEmployeeScheduleAndCheckForExceptions(jobId);
         SolverStatus solverStatus = solverManager.getSolverStatus(jobId);
         schedule.setSolverStatus(solverStatus);

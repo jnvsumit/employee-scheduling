@@ -9,6 +9,8 @@ import org.acme.employeescheduling.mapper.EmployeesScheduleMapper;
 import org.acme.employeescheduling.utils.DataUtil;
 import org.acme.employeescheduling.utils.JsonUtil;
 import org.acme.employeescheduling.service.Main;
+
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
@@ -16,9 +18,9 @@ import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
 @ApplicationScoped
 public class DataService {
 
-    public EmployeeSchedule getEmployeeSchedule() {
+    public EmployeeSchedule getEmployeeSchedule(LocalDate startDate, LocalDate endDate) {
 
-        List <Shift> shifts = Main.getShifts();
+        List <Shift> shifts = Main.getShifts(startDate,endDate);
         try {
             System.out.println("");
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
@@ -36,9 +38,9 @@ public class DataService {
             String data = DataUtil.getDataFromFile("data/employee.json");
 
             EmployeesScheduleDTO[] scheduleDTOS = JsonUtil.deserialize(data, EmployeesScheduleDTO[].class);
-           for(EmployeesScheduleDTO employeesScheduleDTO :scheduleDTOS){
-//               employeesScheduleDTO.ge
-           }
+//           for(EmployeesScheduleDTO employeesScheduleDTO :scheduleDTOS){
+////               employeesScheduleDTO.ge
+//           }
 
             return Arrays.stream(scheduleDTOS).toList();
 
