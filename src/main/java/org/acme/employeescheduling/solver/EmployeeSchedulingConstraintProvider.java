@@ -44,9 +44,9 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                     // Retrieve the start time of the shift
                     LocalTime shiftStartTime = shift.getStart().toLocalTime();
                     // Check if any availability of the employee matches the shift start time
-                    return shift.getEmployee().getAvailabilities().stream()
+                    return !(shift.getEmployee().getAvailabilities().stream()
                             .anyMatch(availability ->
-                                    availability.getStartTime().equals(shiftStartTime));
+                                    availability.getStartTime().equals(shiftStartTime)));
                 })
                 .penalize(HardSoftScore.ONE_HARD)
                 .asConstraint("Shift start time doesn't match employee availability");

@@ -70,6 +70,8 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import java.time.LocalDate;
+
 @Tag(name = "Demo data", description = "Data from resources folder")
 @Path("demo-data")
 public class EmployeeScheduleDemoResource {
@@ -88,8 +90,9 @@ public class EmployeeScheduleDemoResource {
     @Operation(summary = "Find an unsolved demo schedule")
     @GET
     public Response getData() {
-//        return Response.ok(dataService.getEmployeeSchedule()).build();
+        LocalDate startDate = LocalDate.now();
+        return Response.ok(dataService.getEmployeeSchedule(startDate,startDate.plusDays((7)))).build();
 //        return Response.ok("").build();
-        return Response.ok().build();
+//        return Response.ok().build();
     }
 }
