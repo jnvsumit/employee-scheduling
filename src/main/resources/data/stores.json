@@ -19,12 +19,19 @@
         ]
       },
       {
-        "skill_name": "MANAGER",
-        "minimum_employee_count": 1
-      },
-      {
-        "skill_name": "SELLER",
-        "minimum_employee_count": 1
+        "start_time": "15:00",
+        "end_time": "22:00",
+        "employee_count": 2,
+        "required_skills": [
+          {
+            "skill_name": "MANAGER",
+            "minimum_employee_count": 1
+          },
+          {
+            "skill_name": "SELLER",
+            "minimum_employee_count": 1
+          }
+        ]
       }
     ]
   },

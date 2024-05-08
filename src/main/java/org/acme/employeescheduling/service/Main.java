@@ -47,7 +47,7 @@ public class Main {
          Type storeListType = new TypeToken<List<DepartmentDTO>>() {
          }.getType();
          List<DepartmentDTO> storeDTOs = gson.fromJson(jsonData, storeListType);
-//         logger.log(Level.INFO,"Store dto in main .java"+storeDTOs);
+         logger.log(Level.INFO,"Store dto in main .java"+storeDTOs);
          // Map DTOs to Store class
          List<Department> stores = mapToStores(storeDTOs);
 
