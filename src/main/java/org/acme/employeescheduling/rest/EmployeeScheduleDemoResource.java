@@ -73,7 +73,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import java.time.LocalDate;
 
 @Tag(name = "Demo data", description = "Data from resources folder")
-@Path("demo-data")
+@Path("emp-scheduler")
 public class EmployeeScheduleDemoResource {
 
     private final DataService dataService;
@@ -89,6 +89,7 @@ public class EmployeeScheduleDemoResource {
                             schema = @Schema(implementation = EmployeeSchedule.class)))})
     @Operation(summary = "Find an unsolved demo schedule")
     @GET
+    @Path("/get-demo-data")
     public Response getData() {
         LocalDate startDate = LocalDate.now();
         return Response.ok(dataService.getEmployeeSchedule(startDate,startDate.plusDays((7)))).build();

@@ -1,6 +1,7 @@
 package org.acme.employeescheduling.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import org.acme.employeescheduling.domain.Availability;
 import org.acme.employeescheduling.domain.EmployeeSchedule;
 import org.acme.employeescheduling.domain.Shift;
 import org.acme.employeescheduling.dto.EmployeesScheduleDTO;
@@ -24,8 +25,10 @@ public class DataService {
         try {
             System.out.println("");
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
+            List < Availability> availabilities = Main.getAvailabilities(startDate,endDate,employeesScheduleDTOS);
+
             List<ShiftDTO> shiftDTOS = getShifts();
-            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shifts);
+            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shifts,availabilities);
 //            return null;
         } catch (Exception e) {
             LOGGER.error("Something went wrong", e);

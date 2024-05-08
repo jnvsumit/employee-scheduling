@@ -19,10 +19,10 @@ public class Employee {
 
     private Set<String> skills;
 
-    private StoreName domain;
+    private String domain;
     private List<Schedule> availabilities;
 
-    public Employee(String name, StoreName domain) {
+    public Employee(String name, String domain) {
         this.name = name;
         this.domain = domain;
     }

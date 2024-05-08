@@ -1,12 +1,12 @@
 package org.acme.employeescheduling.service;
 
+import java.util.stream.Collectors;
 import com.aayushatharva.brotli4j.common.annotations.Local;
 import org.acme.employeescheduling.domain.*;
+import org.acme.employeescheduling.domain.RequiredShift;
+import org.acme.employeescheduling.domain.RequiredSkill;
+import org.acme.employeescheduling.dto.*;
 import org.acme.employeescheduling.service.DataService;
-import org.acme.employeescheduling.dto.DepartmentDTO;
-import org.acme.employeescheduling.dto.EmployeeDTO;
-import org.acme.employeescheduling.dto.RequiredSkillDTO;
-import org.acme.employeescheduling.dto.RequiredShiftDTO;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -47,17 +47,12 @@ public class Main {
          Type storeListType = new TypeToken<List<DepartmentDTO>>() {
          }.getType();
          List<DepartmentDTO> storeDTOs = gson.fromJson(jsonData, storeListType);
+         logger.log(Level.INFO,"Store dto in main .java"+storeDTOs);
          // Map DTOs to Store class
          List<Department> stores = mapToStores(storeDTOs);
-         logger.log(Level.INFO,"Start date "+startDate);
-         logger.log(Level.INFO,"End date "+endDate);
 
-//         LocalDate startDate = LocalDate.now()                 // Get the current date
-//                 .with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
          long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-         logger.log(Level.INFO,"Days Between  "+daysBetween);
 
-//         int initialRosterDays = 21;
          List<Shift> allShifts = new LinkedList<>();
          for(int i=0;i<=daysBetween;i++){
 
@@ -71,19 +66,6 @@ public class Main {
          }
          AtomicInteger countShift = new AtomicInteger();
          allShifts.forEach(s -> s.setId(Integer.toString(countShift.getAndIncrement())));
-//         List <Employee> employees = EmployeesScheduleMapper.getEmployees();
-//         for (Shift shift : allShifts) {
-//             // Find suitable employee for the shift
-//             Employee suitableEmployee = findSuitableEmployee(shift, employees);
-//
-//             // Assign employee to the shift if found
-//             if (suitableEmployee != null) {
-//                 shift.setEmployee(suitableEmployee);
-//                 System.out.println("Assigned " + suitableEmployee.getName() + " to shift on " + shift.getDay());
-//             } else {
-//                 System.out.println("No suitable employee found for shift on " + shift.getDay());
-//             }
-//         }
 
          return allShifts;
      }
@@ -97,8 +79,168 @@ public class Main {
 //                return employee;
 //            }
 //        }
-//        return null; // No suitable employee found
+//        return null; // No suitable employee found'
 //    }
+/*private static List<Availability> getAvailabilities(LocalDate startDate, LocalDate endDate, List<Employee> employeeList) {
+    List<Availability> availabilities = new LinkedList<>();
+
+    // Iterate over each day between startDate and endDate
+    for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+        final LocalDate currentDate = date;
+
+        // Iterate over each employee
+        for (Employee employee : employeeList) {
+            // Find schedules for the current employee matching the current day
+            List<Schedule> schedulesForDay = employee.getSchedules().stream()
+                    .filter(schedule -> schedule.getSchedule().stream()
+                            .anyMatch(s -> s.getDays().contains(currentDate.getDayOfWeek().toString())))
+                    .collect(Collectors.toList());
+
+            // Iterate over the schedules found for the current employee and day
+            for (Schedule schedule : schedulesForDay) {
+                // Create Availability objects based on the start and end times in the schedule
+                schedule.getSchedule().forEach(slot -> {
+                    Availability availability = Availability.builder()
+                            .id(Availability.generateId())
+                            .employee(employee)
+                            .startTime(LocalTime.parse(slot.getStart_time()))
+                            .endTime(LocalTime.parse(slot.getEnd_time()))
+                            .date(currentDate)
+                            .build();
+                    availabilities.add(availability);
+                });
+            }
+        }
+    }
+
+    return availabilities;
+}*/
+
+//    public static List<Availability> getAvailabilities(LocalDate startDate, LocalDate endDate, List<EmployeesScheduleDTO> employeesScheduleDTOList) {
+//    List<Availability> availabilities = new LinkedList<>();
+//
+//    // Iterate over each day between startDate and endDate
+//    for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+//        final LocalDate currentDate = date;
+//
+//        // Iterate over each employee schedule DTO
+//        for (EmployeesScheduleDTO employeesScheduleDTO : employeesScheduleDTOList) {
+//            // Check if employee schedule DTO is for the current domain
+//            if (!employeesScheduleDTO.getDomain().equals("FRUIT")) {
+//                continue;
+//            }
+//
+//            // Find schedules for the current employee schedule DTO matching the current day
+//            List<EmployeeScheduleDTO> schedulesForDay = employeesScheduleDTO.getSchedules().stream()
+//                    .filter(schedule -> schedule.getSchedule().stream()
+//                            .anyMatch(s -> s.getDays().contains(currentDate.getDayOfWeek().toString())))
+//                    .collect(Collectors.toList());
+//
+//            // Iterate over the schedules found for the current employee and day
+//            for (EmployeeScheduleDTO schedule : schedulesForDay) {
+//                // Create Availability objects based on the start and end times in the schedule
+//                schedule.getSchedule().forEach(slot -> {
+//                    Availability availability = Availability.builder()
+//                            .employee(new Employee(employeesScheduleDTO.getName(), StoreName.valueOf(employeesScheduleDTO.getDomain())))
+//                            .startTime(LocalTime.parse(slot.getStartTime()))
+//                            .endTime(LocalTime.parse(slot.getEndTime()))
+//                            .date(currentDate)
+//                            .build();
+//                    logger.log(Level.INFO,"Availability"+availability);
+//                    availabilities.add(availability);
+//                });
+//            }
+//        }
+//    }
+//        AtomicInteger countShift = new AtomicInteger();
+//        availabilities.forEach(a -> a.setId(Integer.toString(countShift.getAndIncrement())));
+//    return availabilities;
+//}
+
+    public static List<Availability> getAvailabilities(LocalDate startDate, LocalDate endDate, List<EmployeesScheduleDTO> employeesScheduleDTOList) {
+        List<Availability> availabilities = new LinkedList<>();
+
+        // Map to keep track of the current schedule index for each employee
+        int[] scheduleIndices = new int[employeesScheduleDTOList.size()];
+
+        // Iterate over each date between startDate and endDate
+        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+            // Iterate over each employee schedule DTO
+            for (int i = 0; i < employeesScheduleDTOList.size(); i++) {
+                EmployeesScheduleDTO employeesScheduleDTO = employeesScheduleDTOList.get(i);
+                logger.log(Level.INFO,"=================>"+employeesScheduleDTO);
+                // Check if the employee schedule DTO has any schedules
+                if (employeesScheduleDTO.getSchedules().isEmpty()) {
+                    continue;
+                }
+                // Get the current schedule index for the employee
+                int scheduleIndex = scheduleIndices[i] % employeesScheduleDTO.getSchedules().size();
+                // Get the schedule for the current day of the week
+                ScheduleDTO scheduleForDay = getScheduleForDay(employeesScheduleDTO, date.getDayOfWeek(), scheduleIndex);
+                if (scheduleForDay != null) {
+                    // Create an availability for the employee on the current date
+                    Availability availability = Availability.builder()
+//                            .id(Availability.generateId())
+                            .employee(new Employee(employeesScheduleDTO.getName(), employeesScheduleDTO.getDomain()))
+                            .startTime(LocalTime.parse(scheduleForDay.getStartTime()))
+                            .endTime(LocalTime.parse(scheduleForDay.getEndTime()))
+                            .date(date)
+                            .build();
+                    availabilities.add(availability);
+                }
+                // Increment the current schedule index for the employee
+                scheduleIndices[i]++;
+            }
+        }
+        AtomicInteger countShift = new AtomicInteger();
+        availabilities.forEach(a -> a.setId(Integer.toString(countShift.getAndIncrement())));
+        return availabilities;
+    }
+
+    // Get the schedule for the specified day of the week from the employee schedule DTO
+    private static ScheduleDTO getScheduleForDay(EmployeesScheduleDTO employeesScheduleDTO, DayOfWeek dayOfWeek, int scheduleIndex) {
+        for (EmployeeScheduleDTO scheduleDTO : employeesScheduleDTO.getSchedules()) {
+            for (ScheduleDTO schedule : scheduleDTO.getSchedule()) {
+                if (schedule.getDays().contains(dayOfWeek.toString())) {
+                    // Check if the schedule index is within bounds
+                    if (scheduleIndex >= 0 && scheduleIndex < scheduleDTO.getSchedule().size()) {
+                        return scheduleDTO.getSchedule().get(scheduleIndex);
+                    } else {
+                        // Handle the case where the index is out of bounds
+                        return null; // Or throw an exception or handle it according to your requirement
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+
+    // Check if the employee schedule DTO has a schedule for the specified day of the week
+    private static boolean hasScheduleForDay(EmployeesScheduleDTO employeesScheduleDTO, DayOfWeek dayOfWeek) {
+        for (EmployeeScheduleDTO scheduleDTO : employeesScheduleDTO.getSchedules()) {
+            for (ScheduleDTO schedule : scheduleDTO.getSchedule()) {
+                if (schedule.getDays().contains(dayOfWeek.toString())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // Get the schedule for the specified day of the week from the employee schedule DTO
+    private static ScheduleDTO getScheduleForDay(EmployeesScheduleDTO employeesScheduleDTO, DayOfWeek dayOfWeek) {
+        for (EmployeeScheduleDTO scheduleDTO : employeesScheduleDTO.getSchedules()) {
+            for (ScheduleDTO schedule : scheduleDTO.getSchedule()) {
+                if (schedule.getDays().contains(dayOfWeek.toString())) {
+                    return schedule;
+                }
+            }
+        }
+        return null;
+    }
+
+
     private static List<Department> mapToStores(List<DepartmentDTO> departmentDTOs) {
         List<Department> departments = new ArrayList<>();
         for (DepartmentDTO departmentDTO : departmentDTOs) {
@@ -156,9 +298,6 @@ public class Main {
 
                 }
             }
-        }
-        for(Shift shift: allShifts){
-            System.out.println(shift);
         }
         return allShifts;
     }

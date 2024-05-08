@@ -23,12 +23,12 @@ public class EmployeesScheduleMapper {
     private static final Logger logger = Logger.getLogger(EmployeesScheduleMapper.class.getName());
 
 
-    public static EmployeeSchedule toEmployeeSchedule(List<EmployeesScheduleDTO> dtoE, List<Shift> shifts) {
+    public static EmployeeSchedule toEmployeeSchedule(List<EmployeesScheduleDTO> dtoE, List<Shift> shifts,List<Availability> availabilities) {
 
 
         return EmployeeSchedule
                 .builder()
-                .availabilities(getAvailabilities(dtoE))
+                .availabilities(availabilities)
                 .employees(getEmployees(dtoE))
                 .shifts(shifts)
                 .build();
@@ -36,7 +36,7 @@ public class EmployeesScheduleMapper {
 
     private static List<Availability> getAvailabilities(List<EmployeesScheduleDTO> dto) {
         return dto.stream().map(e -> {
-            logger.log(Level.INFO, "Converting EmployeesScheduleDTO to Employee: " + e.toString());
+//            logger.log(Level.INFO, "Converting EmployeesScheduleDTO to Employee: " + e.toString());
 
             return Availability
                     .builder()
@@ -44,14 +44,14 @@ public class EmployeesScheduleMapper {
                     .employee(getEmployee(e))
                     .startTime(getStartTime(e))
                     .endTime(getEndTime(e))
-                    .availabilityOnDay(getAvailabilityOnDay(e))
+//                    .availabilityOnDay(getAvailabilityOnDay(e))
                     .build();
         }).collect(Collectors.toList());
     }
 
     public static List<Employee> getEmployees(List<EmployeesScheduleDTO> dto) {
-        logger.log(Level.INFO, "EmployeesScheduleDTO to Employee: " + dto.stream().map(EmployeesScheduleMapper::getEmployee).collect(Collectors.toList()));
-
+        logger.log(Level.INFO, "EmployeesScheduleDTO to Employee: " + dto.toString());
+//
         return dto.stream().map(EmployeesScheduleMapper::getEmployee).collect(Collectors.toList());
     }
 
@@ -65,12 +65,13 @@ public class EmployeesScheduleMapper {
     private static Employee getEmployee(EmployeesScheduleDTO dto) {
 
 
-        logger.info("Scheduless------: " + dto.getSchedules().stream()
-                .flatMap(scheduleDTO -> scheduleDTO.getSchedule().stream().toList().stream())+"\n");
-        logger.log(Level.INFO, "Employee schedule 1: " + dto.getSchedules().get(0));
+//        logger.info("Scheduless------: " + dto.getSchedules().stream()
+//                .flatMap(scheduleDTO -> scheduleDTO.getSchedule().stream().toList().stream())+"\n");
+//        logger.log(Level.INFO, "Employee schedule 1: " + dto.getSchedules().get(0));
 //        logger.log(Level.INFO, "Employee schedule 2: " + dto.getSchedules().get(1).toString());
 
 //        logger.log(Level.INFO, "Employee: " + dto.getSchedules().get(0).getSchedule().get(1).toString());
+
 
 List<Schedule> availabilities = new ArrayList<>();
 availabilities.add(new Schedule(DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getStartTime()),DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getEndTime())));
@@ -82,7 +83,7 @@ if(dto.getSchedules().size()>1){
                 .builder()
                 .name(dto.getName())
                 .skills(new HashSet<>(dto.getSkills()))
-                .domain(StoreName.valueOf(dto.getDomain()))
+                .domain(dto.getDomain())
                 .availabilities(availabilities)
                 .build();
     }
