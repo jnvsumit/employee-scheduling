@@ -233,22 +233,22 @@ function renderSchedule(schedule) {
     schedule.scheduleState.firstDraftDate,
     "draft"
   );
-  // schedule.availabilities.forEach((availability, index) => {
-  //     const availabilityDate = JSJoda.LocalDate.parse(availability.date);
-  //     const start = availabilityDate.atStartOfDay().toString();
-  //     const end = availabilityDate.plusDays(1).atStartOfDay().toString();
-  //     const byEmployeeShiftElement = $(`<div/>`)
-  //         .append($(`<h5 class="card-title mb-1"/>`).text(availability.availabilityType));
-  //     const mapKey = availability.employee.name + '-' + availabilityDate.toString();
-  //     availabilityMap.set(mapKey, availability.availabilityType);
-  //     byEmployeeItemDataSet.add({
-  //         id: 'availability-' + index, group: availability.employee.name,
-  //         content: byEmployeeShiftElement.html(),
-  //         start: start, end: end,
-  //         type: "background",
-  //         style: "opacity: 0.5; background-color: " + getAvailabilityColor(availability.availabilityType),
-  //     });
-  // });
+   schedule.availabilities.forEach((availability, index) => {
+       const availabilityDate = JSJoda.LocalDate.parse(availability.date);
+       const start = availabilityDate.atStartOfDay().toString();
+       const end = availabilityDate.plusDays(1).atStartOfDay().toString();
+       const byEmployeeShiftElement = $(`<div/>`)
+           .append($(`<h5 class="card-title mb-1"/>`).text(availability.availabilityType));
+       const mapKey = availability.employee.name + '-' + availabilityDate.toString();
+       availabilityMap.set(mapKey, availability.availabilityType);
+       byEmployeeItemDataSet.add({
+           id: 'availability-' + index, group: availability.employee.name,
+           content: byEmployeeShiftElement.html(),
+           start: start, end: end,
+           type: "background",
+           style: "opacity: 0.5; background-color: " + getAvailabilityColor(availability.availabilityType),
+       });
+   });
 
   schedule.employees.forEach((employee, index) => {
     const employeeGroupElement = $('<div class="card-body p-2"/>')

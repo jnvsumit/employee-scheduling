@@ -20,7 +20,7 @@ public class Employee {
     private Set<String> skills;
 
     private String domain;
-    private List<Schedule> availabilities;
+    private List<Schedule> schedules;
 
     public Employee(String name, String domain) {
         this.name = name;

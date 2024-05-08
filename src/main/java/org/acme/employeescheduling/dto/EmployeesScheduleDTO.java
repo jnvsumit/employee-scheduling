@@ -49,13 +49,13 @@ public class EmployeesScheduleDTO {
     public Set<String> getSkills() {
         return skills;
     }
-//    public EmployeesScheduleDTO(String name, String position, String domain, List<String> skills, List<EmployeeScheduleDTO> schedules) {
-//        this.name = name;
-//        this.position = position;
-//        this.domain = domain;
-//        this.skills = new HashSet<>(skills); // Ensure to copy the provided skills to a new Set
-//        this.schedules = schedules;
-//    }
+    public EmployeesScheduleDTO(String name, String position, String domain, List<String> skills, List<EmployeeScheduleDTO> schedules) {
+        this.name = name;
+        this.position = position;
+        this.domain = domain;
+        this.skills = new HashSet<>(skills); // Ensure to copy the provided skills to a new Set
+        this.schedules = schedules;
+    }
     public List<EmployeeScheduleDTO> getSchedules() {
         return schedules;
     }

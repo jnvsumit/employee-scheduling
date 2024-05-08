@@ -92,7 +92,7 @@ public class EmployeeScheduleDemoResource {
     @Path("/get-demo-data")
     public Response getData() {
         LocalDate startDate = LocalDate.now();
-        return Response.ok(dataService.getEmployeeSchedule(startDate,startDate.plusDays((7)))).build();
+        return Response.ok(dataService.getEmployeeSchedule(startDate,startDate.plusDays((30)))).build();
 //        return Response.ok("").build();
 //        return Response.ok().build();
     }

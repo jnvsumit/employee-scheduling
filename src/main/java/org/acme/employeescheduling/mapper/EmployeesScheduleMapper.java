@@ -64,7 +64,6 @@ public class EmployeesScheduleMapper {
 */
     private static Employee getEmployee(EmployeesScheduleDTO dto) {
 
-
 //        logger.info("Scheduless------: " + dto.getSchedules().stream()
 //                .flatMap(scheduleDTO -> scheduleDTO.getSchedule().stream().toList().stream())+"\n");
 //        logger.log(Level.INFO, "Employee schedule 1: " + dto.getSchedules().get(0));
@@ -82,9 +81,9 @@ if(dto.getSchedules().size()>1){
         return Employee
                 .builder()
                 .name(dto.getName())
-                .skills(new HashSet<>(dto.getSkills()))
+                .skills(dto.getSkills())
                 .domain(dto.getDomain())
-                .availabilities(availabilities)
+                .schedules(availabilities)
                 .build();
     }
 

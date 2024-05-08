@@ -5,6 +5,8 @@ import ai.timefold.solver.core.api.score.stream.Constraint;
 import ai.timefold.solver.core.api.score.stream.ConstraintFactory;
 import ai.timefold.solver.core.api.score.stream.ConstraintProvider;
 import ai.timefold.solver.core.api.score.stream.Joiners;
+import org.acme.employeescheduling.domain.Availability;
+import org.acme.employeescheduling.domain.AvailabilityType;
 import org.acme.employeescheduling.domain.Shift;
 
 import java.time.Duration;
@@ -34,23 +36,23 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                 atLeast10HoursBetweenTwoShifts(constraintFactory),
                 oneShiftPerDay(constraintFactory),
                 noOverlappingShifts(constraintFactory),
-                matchShiftStartTimeWithEmployeeAvailability(constraintFactory)
+//                matchShiftStartTimeWithEmployeeAvailability(constraintFactory)
         };
     }
 
-    Constraint matchShiftStartTimeWithEmployeeAvailability(ConstraintFactory constraintFactory) {
-        return constraintFactory.forEach(Shift.class)
-                .filter(shift -> {
-                    // Retrieve the start time of the shift
-                    LocalTime shiftStartTime = shift.getStart().toLocalTime();
-                    // Check if any availability of the employee matches the shift start time
-                    return !(shift.getEmployee().getAvailabilities().stream()
-                            .anyMatch(availability ->
-                                    availability.getStartTime().equals(shiftStartTime)));
-                })
-                .penalize(HardSoftScore.ONE_HARD)
-                .asConstraint("Shift start time doesn't match employee availability");
-    }
+//    Constraint matchShiftStartTimeWithEmployeeAvailability(ConstraintFactory constraintFactory) {
+//        return constraintFactory.forEach(Shift.class)
+//                .filter(shift -> {
+//                    // Retrieve the start time of the shift
+//                    LocalTime shiftStartTime = shift.getStart().toLocalTime();
+//                    // Check if any availability of the employee matches the shift start time
+//                    return !(shift.getEmployee().getAvailabilities().stream()
+//                            .anyMatch(availability ->
+//                                    availability.getStartTime().equals(shiftStartTime)));
+//                })
+//                .penalize(HardSoftScore.ONE_HARD)
+//                .asConstraint("Shift start time doesn't match employee availability");
+//    }
     Constraint noOverlappingShifts(ConstraintFactory constraintFactory) {
         return constraintFactory.forEachUniquePair(Shift.class, Joiners.equal(Shift::getEmployee),
                         Joiners.overlapping(Shift::getStart, Shift::getEnd))
@@ -65,12 +67,12 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                 .penalize(HardSoftScore.ONE_HARD)
                 .asConstraint("Missing required skill");
     }
-//    Constraint requiredDomain(ConstraintFactory constraintFactory) {
-//        return constraintFactory.forEach(Shift.class)
-//                .filter(shift -> !shift.getEmployee().getDomain().equals(shift.getStoreType()))
-//                .penalize(HardSoftScore.ONE_HARD)
-//                .asConstraint("Domain does not match");
-//    }
+    Constraint requiredDomain(ConstraintFactory constraintFactory) {
+        return constraintFactory.forEach(Shift.class)
+                .filter(shift -> !shift.getEmployee().getDomain().equals(shift.getStoreType()))
+                .penalize(HardSoftScore.ONE_HARD)
+                .asConstraint("Domain does not match");
+    }
 
     Constraint atLeast10HoursBetweenTwoShifts(ConstraintFactory constraintFactory) {
         return constraintFactory.forEachUniquePair(Shift.class,
@@ -91,6 +93,42 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                         Joiners.equal(shift -> shift.getStart().getNano()))
                 .penalize(HardSoftScore.ONE_HARD)
                 .asConstraint("Max one shift per day");
+    }
+
+    private static int getShiftDurationInMinutes(Shift shift) {
+        return (int) Duration.between(shift.getStart(), shift.getEnd()).toMinutes();
+    }
+
+
+    Constraint unavailableEmployee(ConstraintFactory constraintFactory) {
+        return constraintFactory.forEach(Shift.class)
+                .join(Availability.class, Joiners.equal((Shift shift) -> shift.getStart().toLocalDate(), Availability::getDate),
+                        Joiners.equal(Shift::getEmployee, Availability::getEmployee))
+                .filter((shift, availability) -> availability.getAvailabilityType() == AvailabilityType.UNAVAILABLE)
+                .penalize(HardSoftScore.ONE_HARD,
+                        (shift, availability) -> getShiftDurationInMinutes(shift))
+                .asConstraint("Unavailable employee");
+    }
+
+
+    Constraint desiredDayForEmployee(ConstraintFactory constraintFactory) {
+        return constraintFactory.forEach(Shift.class)
+                .join(Availability.class, Joiners.equal((Shift shift) -> shift.getStart().toLocalDate(), Availability::getDate),
+                        Joiners.equal(Shift::getEmployee, Availability::getEmployee))
+                .filter((shift, availability) -> availability.getAvailabilityType() == AvailabilityType.DESIRED)
+                .reward(HardSoftScore.ONE_SOFT,
+                        (shift, availability) -> getShiftDurationInMinutes(shift))
+                .asConstraint("Desired day for employee");
+    }
+
+    Constraint undesiredDayForEmployee(ConstraintFactory constraintFactory) {
+        return constraintFactory.forEach(Shift.class)
+                .join(Availability.class, Joiners.equal((Shift shift) -> shift.getStart().toLocalDate(), Availability::getDate),
+                        Joiners.equal(Shift::getEmployee, Availability::getEmployee))
+                .filter((shift, availability) -> availability.getAvailabilityType() == AvailabilityType.UNDESIRED)
+                .penalize(HardSoftScore.ONE_SOFT,
+                        (shift, availability) -> getShiftDurationInMinutes(shift))
+                .asConstraint("Undesired day for employee");
     }
 
 }

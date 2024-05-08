@@ -25,7 +25,7 @@ public class DataService {
         try {
             System.out.println("");
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
-            List < Availability> availabilities = Main.getAvailabilities(startDate,endDate,employeesScheduleDTOS);
+            List < Availability> availabilities = Main.generateAvailabilities(employeesScheduleDTOS,startDate,endDate);
 
             List<ShiftDTO> shiftDTOS = getShifts();
             return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shifts,availabilities);

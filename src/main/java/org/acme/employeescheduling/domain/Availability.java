@@ -9,11 +9,15 @@ import java.util.UUID;
 
 
 import ai.timefold.solver.core.api.domain.lookup.PlanningId;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Availability {
 
     @PlanningId
@@ -24,8 +28,14 @@ public class Availability {
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate date;
-    private
+    private AvailabilityType availabilityType;
 
+    public Availability(String id, Employee employee, LocalDate date, AvailabilityType availabilityType) {
+        this.id = id;
+        this.employee = employee;
+        this.date = date;
+        this.availabilityType = availabilityType;
+    }
 
     @Override
     public boolean equals(Object o) {

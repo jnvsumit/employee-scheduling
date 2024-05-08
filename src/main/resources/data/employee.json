@@ -13,7 +13,6 @@
             "days": [
               "MONDAY",
               "TUESDAY",
-              "WEDNESDAY",
               "THURSDAY",
               "FRIDAY",
               "SATURDAY"
@@ -36,6 +35,48 @@
             ],
             "start_time": "15:00",
             "end_time": "22:00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "gdfghf",
+    "position": "HEAD OF FRUIT",
+    "domain": "FRUIT",
+    "skills": [
+      "MANAGER"
+    ],
+    "schedules": [
+      {
+        "schedule": [
+          {
+            "days": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY"
+            ],
+            "start_time": "15:00",
+            "end_time": "22:00"
+          }
+        ]
+      },
+      {
+        "schedule": [
+          {
+            "days": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY"
+            ],
+            "start_time": "08:00",
+            "end_time": "15:00"
           }
         ]
       }

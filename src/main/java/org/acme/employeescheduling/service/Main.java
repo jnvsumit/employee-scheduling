@@ -70,92 +70,98 @@ public class Main {
          return allShifts;
      }
 
-//    private static Employee findSuitableEmployee(Shift shift, List<Employee> employees) {
-//        for (Employee employee : employees) {
-//            // Check if employee has required skill and availability on the shift day
-//            if (employee.getDomain().equals(shift.getStoreName()) &&
-//                    employee.hasSkill(shift.getRequiredSkill()) &&
-//                    employee.isAvailableOn(shift.getDay(), shift.getStart(), shift.getEnd())) {
-//                return employee;
-//            }
-//        }
-//        return null; // No suitable employee found'
-//    }
-/*private static List<Availability> getAvailabilities(LocalDate startDate, LocalDate endDate, List<Employee> employeeList) {
-    List<Availability> availabilities = new LinkedList<>();
+    /*public static List<Availability> generateAvailabilities(List<EmployeesScheduleDTO> employees, LocalDate startDate, LocalDate endDate) {
+        List<Availability> availabilities = new ArrayList<>();
 
-    // Iterate over each day between startDate and endDate
-    for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
-        final LocalDate currentDate = date;
+        LocalDate dateIterator = startDate;
+        int weekCount = 0;
 
-        // Iterate over each employee
-        for (Employee employee : employeeList) {
-            // Find schedules for the current employee matching the current day
-            List<Schedule> schedulesForDay = employee.getSchedules().stream()
-                    .filter(schedule -> schedule.getSchedule().stream()
-                            .anyMatch(s -> s.getDays().contains(currentDate.getDayOfWeek().toString())))
-                    .collect(Collectors.toList());
+        while (!dateIterator.isAfter(endDate)) {
+            for (EmployeesScheduleDTO employee : employees) {
+                List<EmployeeScheduleDTO> schedules = employee.getSchedules();
+                ScheduleDTO schedule = schedules.get(weekCount % schedules.size()).getSchedule().get(0); // Rotate through schedules
+                List<String> scheduleDays = schedule.getDays();
 
-            // Iterate over the schedules found for the current employee and day
-            for (Schedule schedule : schedulesForDay) {
-                // Create Availability objects based on the start and end times in the schedule
-                schedule.getSchedule().forEach(slot -> {
-                    Availability availability = Availability.builder()
-                            .id(Availability.generateId())
-                            .employee(employee)
-                            .startTime(LocalTime.parse(slot.getStart_time()))
-                            .endTime(LocalTime.parse(slot.getEnd_time()))
-                            .date(currentDate)
-                            .build();
-                    availabilities.add(availability);
-                });
+                if (scheduleDays.contains(dateIterator.getDayOfWeek().toString())) {
+                    availabilities.add(createAvailability(employee, dateIterator, schedule.getStartTime(), schedule.getEndTime()));
+                } else {
+                    availabilities.add(createUnavailableAvailability(employee, dateIterator));
+                }
+            }
+
+            // Move to the next week
+            dateIterator = dateIterator.plusDays(7);
+            weekCount++;
+        }
+
+        AtomicInteger countShift = new AtomicInteger();
+        availabilities.forEach(s -> s.setId(Integer.toString(countShift.getAndIncrement())));
+        return availabilities;
+    }*/
+    public static List<Availability> generateAvailabilities(List<EmployeesScheduleDTO> employees, LocalDate startDate, LocalDate endDate) {
+        List<Availability> availabilities = new ArrayList<>();
+
+        LocalDate dateIterator = startDate;
+        int weekCount = 0;
+
+        while (!dateIterator.isAfter(endDate)) {
+            for (EmployeesScheduleDTO employee : employees) {
+                List<EmployeeScheduleDTO> schedules = employee.getSchedules();
+                ScheduleDTO schedule = schedules.get(weekCount % schedules.size()).getSchedule().get(0); // Rotate through schedules
+                List<String> scheduleDays = schedule.getDays();
+
+                if (scheduleDays.contains(dateIterator.getDayOfWeek().toString())) {
+                    logger.log(Level.INFO,"Available\n");
+
+                    logger.log(Level.INFO,"------------->"+employee+"\n\n"+dateIterator);
+                    availabilities.add(createAvailability(employee, dateIterator, schedule.getStartTime(), schedule.getEndTime()));
+                } else {
+                    logger.log(Level.INFO,"Unavailable\n");
+
+                    logger.log(Level.INFO,"------------->"+employee+"\n\n"+dateIterator);
+
+                    availabilities.add(createUnavailableAvailability(employee, dateIterator,schedule.getStartTime(), schedule.getEndTime()));
+                }
+            }
+
+
+            if (!(dateIterator.getDayOfWeek() == DayOfWeek.SATURDAY)){
+                dateIterator = dateIterator.plusDays(1);
+            }
+            else{
+                dateIterator = dateIterator.plusDays(2);
+            }
+
+            if (dateIterator.getDayOfWeek() == DayOfWeek.SATURDAY) {
+                weekCount++;
             }
         }
+        AtomicInteger countShift = new AtomicInteger();
+        availabilities.forEach(s -> s.setId(Integer.toString(countShift.getAndIncrement())));
+        return availabilities;
     }
 
-    return availabilities;
-}*/
+    private static Availability createAvailability(EmployeesScheduleDTO employeesScheduleDTO, LocalDate date, String startTime, String endTime) {
+        Availability availability = new Availability();
+        availability.setEmployee(new Employee(employeesScheduleDTO.getName() ,employeesScheduleDTO.getSkills(),employeesScheduleDTO.getDomain(),null));
+        availability.setDate(date);
+        availability.setStartTime(LocalTime.parse(startTime));
+        availability.setEndTime(LocalTime.parse(endTime));
+        availability.setAvailabilityType(AvailabilityType.DESIRED);
+//        availability.setId(Availability.generateId());
+        return availability;
+    }
 
-//    public static List<Availability> getAvailabilities(LocalDate startDate, LocalDate endDate, List<EmployeesScheduleDTO> employeesScheduleDTOList) {
-//    List<Availability> availabilities = new LinkedList<>();
-//
-//    // Iterate over each day between startDate and endDate
-//    for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
-//        final LocalDate currentDate = date;
-//
-//        // Iterate over each employee schedule DTO
-//        for (EmployeesScheduleDTO employeesScheduleDTO : employeesScheduleDTOList) {
-//            // Check if employee schedule DTO is for the current domain
-//            if (!employeesScheduleDTO.getDomain().equals("FRUIT")) {
-//                continue;
-//            }
-//
-//            // Find schedules for the current employee schedule DTO matching the current day
-//            List<EmployeeScheduleDTO> schedulesForDay = employeesScheduleDTO.getSchedules().stream()
-//                    .filter(schedule -> schedule.getSchedule().stream()
-//                            .anyMatch(s -> s.getDays().contains(currentDate.getDayOfWeek().toString())))
-//                    .collect(Collectors.toList());
-//
-//            // Iterate over the schedules found for the current employee and day
-//            for (EmployeeScheduleDTO schedule : schedulesForDay) {
-//                // Create Availability objects based on the start and end times in the schedule
-//                schedule.getSchedule().forEach(slot -> {
-//                    Availability availability = Availability.builder()
-//                            .employee(new Employee(employeesScheduleDTO.getName(), StoreName.valueOf(employeesScheduleDTO.getDomain())))
-//                            .startTime(LocalTime.parse(slot.getStartTime()))
-//                            .endTime(LocalTime.parse(slot.getEndTime()))
-//                            .date(currentDate)
-//                            .build();
-//                    logger.log(Level.INFO,"Availability"+availability);
-//                    availabilities.add(availability);
-//                });
-//            }
-//        }
-//    }
-//        AtomicInteger countShift = new AtomicInteger();
-//        availabilities.forEach(a -> a.setId(Integer.toString(countShift.getAndIncrement())));
-//    return availabilities;
-//}
+    private static Availability createUnavailableAvailability(EmployeesScheduleDTO employeesScheduleDTO, LocalDate date, String startTime, String endTime) {
+        Availability availability = new Availability();
+        availability.setEmployee(new Employee(employeesScheduleDTO.getName() ,employeesScheduleDTO.getSkills(),employeesScheduleDTO.getDomain(),null));
+        availability.setDate(date);
+        availability.setStartTime(LocalTime.parse(startTime));
+        availability.setEndTime(LocalTime.parse(endTime));
+        availability.setAvailabilityType(AvailabilityType.UNAVAILABLE);
+//        availability.setId(Availability.generateId());
+        return availability;
+    }
 
     public static List<Availability> getAvailabilities(LocalDate startDate, LocalDate endDate, List<EmployeesScheduleDTO> employeesScheduleDTOList) {
         List<Availability> availabilities = new LinkedList<>();
@@ -181,7 +187,7 @@ public class Main {
                     // Create an availability for the employee on the current date
                     Availability availability = Availability.builder()
 //                            .id(Availability.generateId())
-                            .employee(new Employee(employeesScheduleDTO.getName(), employeesScheduleDTO.getDomain()))
+                            .employee(new Employee(employeesScheduleDTO.getName() ,employeesScheduleDTO.getSkills(),employeesScheduleDTO.getDomain(),null))
                             .startTime(LocalTime.parse(scheduleForDay.getStartTime()))
                             .endTime(LocalTime.parse(scheduleForDay.getEndTime()))
                             .date(date)
