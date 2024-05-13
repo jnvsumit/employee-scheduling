@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class ScheduleDTO {
 
+    @SerializedName("days")
     private List<String> days;
 
     @SerializedName("start_time")

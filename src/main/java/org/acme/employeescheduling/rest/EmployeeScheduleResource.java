@@ -35,6 +35,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,8 +87,8 @@ public class EmployeeScheduleResource {
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces(MediaType.TEXT_PLAIN)
-    public String solve() {
-        EmployeeSchedule problem = dataService.getEmployeeSchedule();
+    public String solve(@QueryParam("start_date") final String startDate, @QueryParam("end_date") final String endDate) {
+        EmployeeSchedule problem = dataService.getEmployeeSchedule(startDate, endDate);
         String jobId = UUID.randomUUID().toString();
         jobIdToJob.put(jobId, Job.ofSchedule(problem));
         solverManager.solveBuilder()

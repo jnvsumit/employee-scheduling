@@ -1,6 +1,6 @@
 [
   {
-    "name": "DCB",
+    "name": "Satyam",
     "position": "HEAD OF FRUIT",
     "domain": "FRUIT",
     "skills": [
@@ -8,36 +8,28 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
     ]
   },
@@ -50,36 +42,28 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
     ]
   },
@@ -92,36 +76,28 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "13:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
     ]
   },
@@ -134,36 +110,28 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "13:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
     ]
   },
@@ -176,36 +144,28 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
     ]
   },
@@ -218,36 +178,28 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
     ]
   },
@@ -260,36 +212,28 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:10",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:10",
+        "end_time": "22:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "14:45"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "14:45"
       }
     ]
   },
@@ -302,36 +246,28 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "10:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "10:00"
       }
     ]
   },
@@ -344,120 +280,96 @@
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "13:00"
       }
     ]
   },
   {
-    "name": "SUJEET",
-    "position": "HEAD OF APNA",
-    "domain": "APNA",
+    "name": "Sujeet",
+    "position": "HEAD OF MEAT",
+    "domain": "MEAT",
     "skills": [
-      "ENGINEER"
+      "MANAGER"
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
     ]
   },
   {
     "name": "Madan",
-    "position": "HEAD OF APNA",
-    "domain": "APNA",
+    "position": "HEAD OF FRUIT",
+    "domain": "FRUIT",
     "skills": [
-      "DEVELOPER"
+      "MANAGER"
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MO",
-              "TU",
-              "WE",
-              "TH",
-              "FR",
-              "SA"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
     ]
   }

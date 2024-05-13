@@ -21,21 +21,21 @@ public class ScheduleState {
     private LocalDate lastHistoricDate;
 
     @JsonIgnore
-    public boolean isHistoric(LocalTime time) {
-        return time.isBefore(LocalTime.MIDNIGHT);
+    public boolean isHistoric(LocalDateTime time) {
+        return time.toLocalTime().isBefore(LocalTime.MIDNIGHT);
     }
 
     @JsonIgnore
-    public boolean isDraft(LocalTime dateTime) {
-        return !dateTime.isBefore(LocalTime.MIDNIGHT);
+    public boolean isDraft(LocalDateTime dateTime) {
+        return !dateTime.toLocalTime().isBefore(LocalTime.MIDNIGHT);
     }
 
     @JsonIgnore
-    public boolean isPublished(LocalTime dateTime) {
+    public boolean isPublished(LocalDateTime dateTime) {
         return !isHistoric(dateTime) && !isDraft(dateTime);
     }
 
-    /*@JsonIgnore
+    @JsonIgnore
     public boolean isHistoric(Shift shift) {
         return isHistoric(shift.getStart());
     }
@@ -48,7 +48,7 @@ public class ScheduleState {
     @JsonIgnore
     public boolean isPublished(Shift shift) {
         return isPublished(shift.getStart());
-    }*/
+    }
 
     @JsonIgnore
     public LocalDate getFirstPublishedDate() {

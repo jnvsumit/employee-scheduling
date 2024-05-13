@@ -102,7 +102,7 @@ function setupAjax() {
 }
 
 function fetchDemoData() {
-    $.get("/demo-data", function (data) {
+    $.get("/get-data?start_date=2024-06-12&end_date=2024-06-30", function (data) {
         // load first data set
         demoDataId = data[0];
         refreshSchedule();
@@ -149,7 +149,7 @@ function refreshSchedule() {
             return;
         }
 
-        path = "/demo-data/" + demoDataId;
+        path = "/get-data/" + demoDataId;
     }
     $.getJSON(path, function (schedule) {
         loadedSchedule = schedule;

@@ -3,6 +3,8 @@ package org.acme.employeescheduling.dto;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class RequiredShift {
 
@@ -11,4 +13,7 @@ public class RequiredShift {
 
     @SerializedName("end_time")
     private String endTime;
+
+    @SerializedName("required_skills")
+    private List<RequiredSkill> requiredSkills;
 }
