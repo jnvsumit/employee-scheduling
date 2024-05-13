@@ -3,12 +3,14 @@ package org.acme.employeescheduling.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.employeescheduling.domain.EmployeeSchedule;
 import org.acme.employeescheduling.domain.Shift;
+import org.acme.employeescheduling.dto.EmployeeDTO;
 import org.acme.employeescheduling.dto.EmployeesScheduleDTO;
 import org.acme.employeescheduling.dto.ShiftDTO;
 import org.acme.employeescheduling.mapper.EmployeesScheduleMapper;
 import org.acme.employeescheduling.utils.DataUtil;
+import org.acme.employeescheduling.utils.DateTimeUtil;
 import org.acme.employeescheduling.utils.JsonUtil;
-import org.acme.employeescheduling.service.Main;
+
 import java.util.Arrays;
 import java.util.List;
 import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
@@ -16,34 +18,24 @@ import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
 @ApplicationScoped
 public class DataService {
 
-    public EmployeeSchedule getEmployeeSchedule() {
-
-        List <Shift> shifts = Main.getShifts();
+    public EmployeeSchedule getEmployeeSchedule(String startDate, String endDate) {
         try {
-            System.out.println("");
-            List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
-            List<ShiftDTO> shiftDTOS = getShifts();
-            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shifts);
-//            return null;
+            List<EmployeeDTO> employees = getEmployees();
+            List<ShiftDTO> shifts = getShifts();
+            return EmployeesScheduleMapper.toEmployeeSchedule(employees, shifts, DateTimeUtil.toLocalDateTime(startDate), DateTimeUtil.toLocalDateTime(endDate));
         } catch (Exception e) {
             LOGGER.error("Something went wrong", e);
             return null;
         }
     }
 
-    private List<EmployeesScheduleDTO> getEmployeeSchedules() throws Exception {
+    private List<EmployeeDTO> getEmployees() throws Exception {
         try {
             String data = DataUtil.getDataFromFile("data/employee.json");
-
-            EmployeesScheduleDTO[] scheduleDTOS = JsonUtil.deserialize(data, EmployeesScheduleDTO[].class);
-           for(EmployeesScheduleDTO employeesScheduleDTO :scheduleDTOS){
-//               employeesScheduleDTO.ge
-           }
-
+            EmployeeDTO[] scheduleDTOS = JsonUtil.deserialize(data, EmployeeDTO[].class);
             return Arrays.stream(scheduleDTOS).toList();
-
         } catch (Exception e) {
-            LOGGER.error("Failed parsing and fetching data", e);
+            LOGGER.error("Failed parsing employees data", e);
             throw e;
         }
     }

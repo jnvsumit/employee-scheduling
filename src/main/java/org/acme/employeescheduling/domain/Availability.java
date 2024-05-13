@@ -1,9 +1,7 @@
 package org.acme.employeescheduling.domain;
 
-import java.time.LocalTime;
-
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 
@@ -20,10 +18,7 @@ public class Availability {
 
     private Employee employee;
 
-    private LocalTime startTime;
-    private LocalTime endTime;
-
-    private Set<AvailabilityOnDay> availabilityOnDay;
+    private List<Schedule> schedules;
 
     @Override
     public boolean equals(Object o) {

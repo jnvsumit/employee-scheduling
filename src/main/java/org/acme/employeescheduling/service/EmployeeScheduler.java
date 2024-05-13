@@ -1,12 +1,8 @@
 package org.acme.employeescheduling.service;
 
 import org.acme.employeescheduling.domain.Shift;
-import org.acme.employeescheduling.domain.Skill;
-import org.acme.employeescheduling.domain.StoreName;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 
 public class EmployeeScheduler {

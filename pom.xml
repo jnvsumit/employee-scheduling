@@ -17,6 +17,8 @@
     <version.compiler.plugin>3.12.1</version.compiler.plugin>
     <version.resources.plugin>3.3.1</version.resources.plugin>
     <version.surefire.plugin>3.2.5</version.surefire.plugin>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <dependencyManagement>

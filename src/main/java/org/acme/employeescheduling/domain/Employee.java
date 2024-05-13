@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.acme.employeescheduling.domain.enums.Department;
+import org.acme.employeescheduling.domain.enums.Skill;
 
 @Data
 @Builder
@@ -17,25 +19,9 @@ public class Employee {
     @PlanningId
     private String name;
 
-    private Set<String> skills;
+    private Set<Skill> skills;
 
-    private StoreName domain;
-    private List<Schedule> availabilities;
-
-    public Employee(String name, StoreName domain) {
-        this.name = name;
-        this.domain = domain;
-    }
-
-    public Employee(String name, Set<String> skills) {
-        this.name = name;
-        this.skills = skills;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
+    private Department department;
 
     @Override
     public boolean equals(Object o) {

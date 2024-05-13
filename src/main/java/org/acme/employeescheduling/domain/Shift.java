@@ -1,7 +1,6 @@
 package org.acme.employeescheduling.domain;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.acme.employeescheduling.domain.enums.*;
+import org.acme.employeescheduling.filters.ShiftPinningFilter;
 
 @Data
 @Builder
@@ -23,39 +24,14 @@ public class Shift {
     @PlanningId
     private String id;
 
-    private String day;
     private LocalDateTime start;
     private LocalDateTime end;
 
-    private String storeType;
-    private String requiredSkill;
+    private Department department;
+    private Skill requiredSkill;
 
     @PlanningVariable
     private Employee employee;
-
-    public Shift(String day,LocalDateTime start, LocalDateTime end, String storeType, String requiredSkill) {
-        this.day = day;
-        this.start = start;
-        this.end = end;
-        this.storeType = storeType;
-        this.requiredSkill = requiredSkill;
-    }
-
-    public Shift(String id, LocalDateTime start, LocalDateTime end, String storeType, String requiredSkill, Employee employee) {
-        this.id = id;
-        this.start = start;
-        this.end = end;
-        this.storeType = storeType;
-        this.requiredSkill = requiredSkill;
-        this.employee = employee;
-    }
-
-
-
-//    @Override
-//    public String toString() {
-//        return start + "-" + end;
-//    }
 
     @Override
     public boolean equals(Object o) {
@@ -72,8 +48,8 @@ public class Shift {
     public int hashCode() {
         return getId().hashCode();
     }
-    public static String generateId(){
 
+    public static String generateId(){
         UUID uuid= UUID.randomUUID();
 
         return String.valueOf(uuid);
