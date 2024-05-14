@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< Updated upstream
     "name": "DCB",
     "position": "HEAD OF FRUIT",
     "domain": "FRUIT",
@@ -167,240 +168,111 @@
     ]
   },
   {
+=======
+>>>>>>> Stashed changes
     "name": "BSS",
-    "position": "SALESMAN FRUIT",
-    "domain": "FRUIT",
+    "position": "FRUIT_SELLER",
+    "domain": "Retail",
     "skills": [
-      "SELLER"
+      "FRUIT_SELLER"
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "10:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       }
-    ]
-  },
-  {
-    "name": "Rahul",
-    "position": "SALESMAN FRUIT",
-    "domain": "FRUIT",
-    "skills": [
-      "SELLER"
-    ],
-    "schedules": [
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "08:00",
-            "end_time": "13:00"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Ankit",
-    "position": "SALESMAN FRUIT",
-    "domain": "FRUIT",
-    "skills": [
-      "SELLER"
-    ],
-    "schedules": [
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
-      }
+
     ]
   },
   {
     "name": "IRF",
-    "position": "SALESMAN MEAT",
-    "domain": "MEAT",
+    "position": "FRUIT_SELLER",
+    "domain": "Retail",
     "skills": [
-      "SELLER"
+      "FRUIT_SELLER"
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "15:10",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:10",
+        "end_time": "22:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "08:00",
-            "end_time": "14:45"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Uday",
-    "position": "SALESMAN MEAT",
-    "domain": "MEAT",
-    "skills": [
-      "SELLER"
-    ],
-    "schedules": [
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "10:00"
       },
       {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "08:00",
-            "end_time": "10:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time" : "08:00",
+        "end_time" : "14:45"
       }
+
     ]
   },
   {
     "name": "RLO",
-    "position": "SALESMAN MEAT",
-    "domain": "MEAT",
+    "position": "FRUIT_SELLER",
+    "domain": "Retail",
     "skills": [
-      "SELLER"
+      "FRUIT_SELLER"
     ],
     "schedules": [
       {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
       },
       {
+<<<<<<< Updated upstream
         "schedule": [
           {
             "days": [
@@ -415,6 +287,18 @@
             "end_time": "13:00"
           }
         ]
+=======
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "10:00"
+>>>>>>> Stashed changes
       }
     ]
   }

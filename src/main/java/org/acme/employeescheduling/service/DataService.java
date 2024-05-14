@@ -1,6 +1,7 @@
 package org.acme.employeescheduling.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import lombok.extern.flogger.Flogger;
 import org.acme.employeescheduling.domain.Availability;
 import org.acme.employeescheduling.domain.EmployeeSchedule;
 import org.acme.employeescheduling.domain.Shift;
@@ -14,23 +15,28 @@ import org.acme.employeescheduling.service.Main;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
 
 @ApplicationScoped
 public class DataService {
+    private static final Logger logger = Logger.getLogger(DataService.class.getName());
 
     public EmployeeSchedule getEmployeeSchedule(LocalDate startDate, LocalDate endDate) {
 
         List <Shift> shifts = Main.getShifts(startDate,endDate);
         try {
-            System.out.println("");
+
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
             List < Availability> availabilities = Main.generateAvailabilities(employeesScheduleDTOS,startDate,endDate);
 
 
-//            List<ShiftDTO> shiftDTOS = getShifts();
-//            List<Shift> assignedShifts = EmployeeScheduler.scheduleShifts(employeesScheduleDTOS,shifts);
-            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shifts,availabilities);
+            List<ShiftDTO> shiftDTOS = getShifts();
+            List<Shift> assignedShifts = EmployeeScheduler.scheduleShifts(employeesScheduleDTOS,shifts);
+            logger.log(Level.INFO,"assgined shifts" + assignedShifts);
+            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, assignedShifts,availabilities);
 //            return null;
         } catch (Exception e) {
             LOGGER.error("Something went wrong", e);
