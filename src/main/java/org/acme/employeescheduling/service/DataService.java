@@ -27,7 +27,9 @@ public class DataService {
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
             List < Availability> availabilities = Main.generateAvailabilities(employeesScheduleDTOS,startDate,endDate);
 
-            List<ShiftDTO> shiftDTOS = getShifts();
+
+//            List<ShiftDTO> shiftDTOS = getShifts();
+            List<Shift> assignedShifts = EmployeeScheduler.scheduleShifts(employeesScheduleDTOS,shifts);
             return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shifts,availabilities);
 //            return null;
         } catch (Exception e) {

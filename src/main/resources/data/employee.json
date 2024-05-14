@@ -83,6 +83,48 @@
     ]
   },
   {
+    "name": "Aman",
+    "position": "HEAD OF FRUIT",
+    "domain": "FRUIT",
+    "skills": [
+      "MANAGER"
+    ],
+    "schedules": [
+      {
+        "schedule": [
+          {
+            "days": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY"
+            ],
+            "start_time": "08:00",
+            "end_time": "15:00"
+          }
+        ]
+      },
+      {
+        "schedule": [
+          {
+            "days": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY"
+            ],
+            "start_time": "15:00",
+            "end_time": "22:00"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "name": "AXB",
     "position": "HEAD OF MEAT",
     "domain": "MEAT",
@@ -371,90 +413,6 @@
             ],
             "start_time": "08:00",
             "end_time": "13:00"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "SUJEET",
-    "position": "HEAD OF APNA",
-    "domain": "APNA",
-    "skills": [
-      "ENGINEER"
-    ],
-    "schedules": [
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Madan",
-    "position": "HEAD OF APNA",
-    "domain": "APNA",
-    "skills": [
-      "DEVELOPER"
-    ],
-    "schedules": [
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "08:00",
-            "end_time": "15:00"
-          }
-        ]
-      },
-      {
-        "schedule": [
-          {
-            "days": [
-              "MONDAY",
-              "TUESDAY",
-              "WEDNESDAY",
-              "THURSDAY",
-              "FRIDAY",
-              "SATURDAY"
-            ],
-            "start_time": "15:00",
-            "end_time": "22:00"
           }
         ]
       }

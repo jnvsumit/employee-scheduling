@@ -32,14 +32,22 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
     public Constraint[] defineConstraints(ConstraintFactory constraintFactory) {
         return new Constraint[]{
                 requiredSkill(constraintFactory),
-//                requiredDomain(constraintFactory),
                 atLeast10HoursBetweenTwoShifts(constraintFactory),
                 oneShiftPerDay(constraintFactory),
                 noOverlappingShifts(constraintFactory),
+                domainMappedStoreName(constraintFactory),
+                unavailableEmployee(constraintFactory),
+                desiredDayForEmployee(constraintFactory)
 //                matchShiftStartTimeWithEmployeeAvailability(constraintFactory)
         };
     }
 
+    Constraint domainMappedStoreName(ConstraintFactory constraintFactory){
+        return constraintFactory.forEach(Shift.class)
+                .filter(shift -> !shift.getStoreType().equals(shift.getEmployee().getDomain()))
+                .penalize(HardSoftScore.ONE_HARD)
+                .asConstraint("Unmatched domain and StoreName");
+    }
 //    Constraint matchShiftStartTimeWithEmployeeAvailability(ConstraintFactory constraintFactory) {
 //        return constraintFactory.forEach(Shift.class)
 //                .filter(shift -> {
@@ -67,12 +75,7 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                 .penalize(HardSoftScore.ONE_HARD)
                 .asConstraint("Missing required skill");
     }
-    Constraint requiredDomain(ConstraintFactory constraintFactory) {
-        return constraintFactory.forEach(Shift.class)
-                .filter(shift -> !shift.getEmployee().getDomain().equals(shift.getStoreType()))
-                .penalize(HardSoftScore.ONE_HARD)
-                .asConstraint("Domain does not match");
-    }
+
 
     Constraint atLeast10HoursBetweenTwoShifts(ConstraintFactory constraintFactory) {
         return constraintFactory.forEachUniquePair(Shift.class,
@@ -82,7 +85,7 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                 .penalize(HardSoftScore.ONE_HARD,
                         (firstShift, secondShift) -> {
                             int breakLength = (int) Duration.between(firstShift.getEnd(), secondShift.getStart()).toMinutes();
-                            return (10 * 60) - breakLength;
+                            return (12 * 60) - breakLength;
                         })
                 .asConstraint("At least 10 hours between 2 shifts");
     }

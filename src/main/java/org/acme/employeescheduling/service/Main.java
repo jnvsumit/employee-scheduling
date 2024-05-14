@@ -39,7 +39,7 @@ public class Main {
      public static List<Shift> getShifts(LocalDate startDate, LocalDate endDate ){
          String jsonData = null;
          try {
-             jsonData = DataUtil.getDataFromFile("data/stores.json");
+             jsonData = DataUtil.getDataFromFile("data/store2.json");
          } catch (Exception e) {
 
          }
@@ -70,34 +70,7 @@ public class Main {
          return allShifts;
      }
 
-    /*public static List<Availability> generateAvailabilities(List<EmployeesScheduleDTO> employees, LocalDate startDate, LocalDate endDate) {
-        List<Availability> availabilities = new ArrayList<>();
 
-        LocalDate dateIterator = startDate;
-        int weekCount = 0;
-
-        while (!dateIterator.isAfter(endDate)) {
-            for (EmployeesScheduleDTO employee : employees) {
-                List<EmployeeScheduleDTO> schedules = employee.getSchedules();
-                ScheduleDTO schedule = schedules.get(weekCount % schedules.size()).getSchedule().get(0); // Rotate through schedules
-                List<String> scheduleDays = schedule.getDays();
-
-                if (scheduleDays.contains(dateIterator.getDayOfWeek().toString())) {
-                    availabilities.add(createAvailability(employee, dateIterator, schedule.getStartTime(), schedule.getEndTime()));
-                } else {
-                    availabilities.add(createUnavailableAvailability(employee, dateIterator));
-                }
-            }
-
-            // Move to the next week
-            dateIterator = dateIterator.plusDays(7);
-            weekCount++;
-        }
-
-        AtomicInteger countShift = new AtomicInteger();
-        availabilities.forEach(s -> s.setId(Integer.toString(countShift.getAndIncrement())));
-        return availabilities;
-    }*/
     public static List<Availability> generateAvailabilities(List<EmployeesScheduleDTO> employees, LocalDate startDate, LocalDate endDate) {
         List<Availability> availabilities = new ArrayList<>();
 
@@ -163,46 +136,6 @@ public class Main {
         return availability;
     }
 
-    public static List<Availability> getAvailabilities(LocalDate startDate, LocalDate endDate, List<EmployeesScheduleDTO> employeesScheduleDTOList) {
-        List<Availability> availabilities = new LinkedList<>();
-
-        // Map to keep track of the current schedule index for each employee
-        int[] scheduleIndices = new int[employeesScheduleDTOList.size()];
-
-        // Iterate over each date between startDate and endDate
-        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
-            // Iterate over each employee schedule DTO
-            for (int i = 0; i < employeesScheduleDTOList.size(); i++) {
-                EmployeesScheduleDTO employeesScheduleDTO = employeesScheduleDTOList.get(i);
-                logger.log(Level.INFO,"=================>"+employeesScheduleDTO);
-                // Check if the employee schedule DTO has any schedules
-                if (employeesScheduleDTO.getSchedules().isEmpty()) {
-                    continue;
-                }
-                // Get the current schedule index for the employee
-                int scheduleIndex = scheduleIndices[i] % employeesScheduleDTO.getSchedules().size();
-                // Get the schedule for the current day of the week
-                ScheduleDTO scheduleForDay = getScheduleForDay(employeesScheduleDTO, date.getDayOfWeek(), scheduleIndex);
-                if (scheduleForDay != null) {
-                    // Create an availability for the employee on the current date
-                    Availability availability = Availability.builder()
-//                            .id(Availability.generateId())
-                            .employee(new Employee(employeesScheduleDTO.getName() ,employeesScheduleDTO.getSkills(),employeesScheduleDTO.getDomain(),null))
-                            .startTime(LocalTime.parse(scheduleForDay.getStartTime()))
-                            .endTime(LocalTime.parse(scheduleForDay.getEndTime()))
-                            .date(date)
-                            .build();
-                    availabilities.add(availability);
-                }
-                // Increment the current schedule index for the employee
-                scheduleIndices[i]++;
-            }
-        }
-        AtomicInteger countShift = new AtomicInteger();
-        availabilities.forEach(a -> a.setId(Integer.toString(countShift.getAndIncrement())));
-        return availabilities;
-    }
-
     // Get the schedule for the specified day of the week from the employee schedule DTO
     private static ScheduleDTO getScheduleForDay(EmployeesScheduleDTO employeesScheduleDTO, DayOfWeek dayOfWeek, int scheduleIndex) {
         for (EmployeeScheduleDTO scheduleDTO : employeesScheduleDTO.getSchedules()) {
@@ -220,32 +153,6 @@ public class Main {
         }
         return null;
     }
-
-
-    // Check if the employee schedule DTO has a schedule for the specified day of the week
-    private static boolean hasScheduleForDay(EmployeesScheduleDTO employeesScheduleDTO, DayOfWeek dayOfWeek) {
-        for (EmployeeScheduleDTO scheduleDTO : employeesScheduleDTO.getSchedules()) {
-            for (ScheduleDTO schedule : scheduleDTO.getSchedule()) {
-                if (schedule.getDays().contains(dayOfWeek.toString())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    // Get the schedule for the specified day of the week from the employee schedule DTO
-    private static ScheduleDTO getScheduleForDay(EmployeesScheduleDTO employeesScheduleDTO, DayOfWeek dayOfWeek) {
-        for (EmployeeScheduleDTO scheduleDTO : employeesScheduleDTO.getSchedules()) {
-            for (ScheduleDTO schedule : scheduleDTO.getSchedule()) {
-                if (schedule.getDays().contains(dayOfWeek.toString())) {
-                    return schedule;
-                }
-            }
-        }
-        return null;
-    }
-
 
     private static List<Department> mapToStores(List<DepartmentDTO> departmentDTOs) {
         List<Department> departments = new ArrayList<>();

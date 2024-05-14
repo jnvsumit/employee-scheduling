@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.acme.employeescheduling.dto.EmployeesScheduleDTO;
 
 @Data
 @Builder
@@ -29,6 +30,14 @@ public class Shift {
 
     private String storeType;
     private String requiredSkill;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     @PlanningVariable
     private Employee employee;

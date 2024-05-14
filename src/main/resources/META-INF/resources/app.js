@@ -183,11 +183,12 @@ function refreshSchedule() {
 }
 
 function renderSchedule(schedule) {
+    const currentDate = new Date().toISOString().slice(0, 10);
   let staticScheduleState = {
     tenantId: "1",
     publishLength: 14,
     draftLength: 14,
-    firstDraftDate: "2024-05-06",
+    firstDraftDate: currentDate,
     lastHistoricDate: "2024-04-29",
   };
   schedule.scheduleState = staticScheduleState;

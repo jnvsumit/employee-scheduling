@@ -29,6 +29,7 @@ public class EmployeesScheduleMapper {
         return EmployeeSchedule
                 .builder()
                 .availabilities(availabilities)
+//                .availabilities()
                 .employees(getEmployees(dtoE))
                 .shifts(shifts)
                 .build();

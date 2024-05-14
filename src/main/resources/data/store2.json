@@ -1,0 +1,28 @@
+[
+  {
+    "name": "HIPER NOYA",
+    "store_type": "Retail",
+    "required_shifts": [
+      {
+        "start_time": "08:00",
+        "end_time": "15:00",
+        "required_skills": [
+          {
+            "skill_name": "FRUIT_SELLER",
+            "minimum_employee_count": 2
+          }
+        ]
+      },
+      {
+        "start_time": "15:00",
+        "end_time": "22:00",
+        "required_skills": [
+          {
+            "skill_name": "FRUIT_SELLER",
+            "minimum_employee_count": 1
+          }
+        ]
+      }
+    ]
+  }
+]
