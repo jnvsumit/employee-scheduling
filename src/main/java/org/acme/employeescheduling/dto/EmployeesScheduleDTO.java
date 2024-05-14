@@ -34,7 +34,7 @@ public class EmployeesScheduleDTO {
         skills = skills;
     }
 
-    public void setSchedules(List<EmployeeScheduleDTO> schedules) {
+    public void setSchedules(List<ScheduleDTO> schedules) {
         this.schedules = schedules;
     }
 
@@ -49,18 +49,18 @@ public class EmployeesScheduleDTO {
     public Set<String> getSkills() {
         return skills;
     }
-    public EmployeesScheduleDTO(String name, String position, String domain, List<String> skills, List<EmployeeScheduleDTO> schedules) {
+    public EmployeesScheduleDTO(String name, String position, String domain, List<String> skills, List<ScheduleDTO> schedules) {
         this.name = name;
         this.position = position;
         this.domain = domain;
         this.skills = new HashSet<>(skills); // Ensure to copy the provided skills to a new Set
         this.schedules = schedules;
     }
-    public List<EmployeeScheduleDTO> getSchedules() {
+    public List<ScheduleDTO> getSchedules() {
         return schedules;
     }
 
-    public EmployeesScheduleDTO(String name, String position, String domain, Set<String> skills, List<EmployeeScheduleDTO> schedules) {
+    public EmployeesScheduleDTO(String name, String position, String domain, Set<String> skills, List<ScheduleDTO> schedules) {
         this.name = name;
         this.position = position;
         this.domain = domain;
@@ -69,5 +69,5 @@ public class EmployeesScheduleDTO {
     }
 
     private Set<String> skills;
-    private List<EmployeeScheduleDTO> schedules;
+    private List<ScheduleDTO> schedules;
 }

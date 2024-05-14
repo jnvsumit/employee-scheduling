@@ -29,7 +29,7 @@ public class DataService {
 
 
 //            List<ShiftDTO> shiftDTOS = getShifts();
-            List<Shift> assignedShifts = EmployeeScheduler.scheduleShifts(employeesScheduleDTOS,shifts);
+//            List<Shift> assignedShifts = EmployeeScheduler.scheduleShifts(employeesScheduleDTOS,shifts);
             return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shifts,availabilities);
 //            return null;
         } catch (Exception e) {
@@ -43,9 +43,6 @@ public class DataService {
             String data = DataUtil.getDataFromFile("data/employee2.json");
 
             EmployeesScheduleDTO[] scheduleDTOS = JsonUtil.deserialize(data, EmployeesScheduleDTO[].class);
-//           for(EmployeesScheduleDTO employeesScheduleDTO :scheduleDTOS){
-////               employeesScheduleDTO.ge
-//           }
 
             return Arrays.stream(scheduleDTOS).toList();
 

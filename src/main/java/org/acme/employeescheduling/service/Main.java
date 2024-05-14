@@ -79,19 +79,19 @@ public class Main {
 
         while (!dateIterator.isAfter(endDate)) {
             for (EmployeesScheduleDTO employee : employees) {
-                List<EmployeeScheduleDTO> schedules = employee.getSchedules();
+                List<ScheduleDTO> schedules = employee.getSchedules();
                 logger.log(Level.INFO,"schedulessgjsdgyug45678" +schedules.toString());
-                EmployeeScheduleDTO schedule = schedules.get(weekCount % schedules.size());// Rotate through schedules
-                List<String> scheduleDays = schedule.getDays();
+//                EmployeeScheduleDTO schedule = schedules.get(weekCount % schedules.size());// Rotate through schedules
+//                List<String> scheduleDays = schedule.getDays();
 
-                if (scheduleDays.contains(dateIterator.getDayOfWeek().toString())) {
+                /*if (scheduleDays.contains(dateIterator.getDayOfWeek().toString())) {
 
                    // availabilities.add(createAvailability(employee, dateIterator, schedule.getStartTime(), schedule.getEndTime()));
                 } else {
 
 
                    // availabilities.add(createUnavailableAvailability(employee, dateIterator,schedule.getStartTime(), schedule.getEndTime()));
-                }
+                }*/
             }
 
 
