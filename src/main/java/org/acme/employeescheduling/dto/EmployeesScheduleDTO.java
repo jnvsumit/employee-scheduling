@@ -14,6 +14,7 @@ public class EmployeesScheduleDTO {
     private String position;
     private String domain;
 
+
     public String getName() {
         return name;
     }

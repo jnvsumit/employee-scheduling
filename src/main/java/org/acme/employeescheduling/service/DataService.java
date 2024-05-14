@@ -23,7 +23,6 @@ public class DataService {
 
         List <Shift> shifts = Main.getShifts(startDate,endDate);
         try {
-            System.out.println("");
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
             List < Availability> availabilities = Main.generateAvailabilities(employeesScheduleDTOS,startDate,endDate);
 
