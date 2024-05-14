@@ -1,21 +1,16 @@
 package org.acme.employeescheduling.mapper;
 
 import org.acme.employeescheduling.domain.*;
+import org.acme.employeescheduling.dto.EmployeeScheduleDTO;
 import org.acme.employeescheduling.dto.EmployeesScheduleDTO;
-import org.acme.employeescheduling.dto.ShiftDTO;
+import org.acme.employeescheduling.dto.ScheduleDTO;
 import org.acme.employeescheduling.utils.DateTimeUtil;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import org.acme.employeescheduling.service.Main;
+
 
 
 public class EmployeesScheduleMapper {
@@ -29,7 +24,6 @@ public class EmployeesScheduleMapper {
         return EmployeeSchedule
                 .builder()
                 .availabilities(availabilities)
-//                .availabilities()
                 .employees(getEmployees(dtoE))
                 .shifts(shifts)
                 .build();
@@ -50,20 +44,13 @@ public class EmployeesScheduleMapper {
         }).collect(Collectors.toList());
     }*/
 
-    public static List<Employee> getEmployees(List<EmployeesScheduleDTO> dto) {
+   public static List<Employee> getEmployees(List<EmployeesScheduleDTO> dto) {
         logger.log(Level.INFO, "EmployeesScheduleDTO to Employee: " + dto.toString());
 //
         return dto.stream().map(EmployeesScheduleMapper::getEmployee).collect(Collectors.toList());
     }
 
-   /* private static List<Shift> getShifts(List<ShiftDTO> dto) {
-        logger.log(Level.INFO,"shift dto list"+dto);
-
-        logger.log(Level.INFO,"===========>"+dto.stream().map(EmployeesScheduleMapper::getShift).collect(Collectors.toList()));
-        return dto.stream().map(EmployeesScheduleMapper::getShift).collect(Collectors.toList());
-    }
-*/
-    private static Employee getEmployee(EmployeesScheduleDTO dto) {
+    /* private static Employee getEmployee(EmployeesScheduleDTO dto) {
 
 List<Schedule> availabilities = new ArrayList<>();
 availabilities.add(new Schedule(DateTimeUtil.toLocalTime(String.valueOf(dto.getSchedules().get(0).getStartTime())),DateTimeUtil.toLocalTime(String.valueOf(dto.getSchedules().get(0).getEndTime()))));
@@ -78,7 +65,27 @@ if(dto.getSchedules().size()>1){
                 .domain(dto.getDomain())
                 .schedules(availabilities)
                 .build();
+    }*/
+
+    private static Employee getEmployee(EmployeesScheduleDTO dto) {
+        List<Schedule> availabilities = new ArrayList<>();
+        for (ScheduleDTO scheduleDTO : dto.getSchedules()) {
+            availabilities.add(new Schedule(
+                    DateTimeUtil.toLocalTime(String.valueOf(scheduleDTO.getStartTime())),
+                    DateTimeUtil.toLocalTime(String.valueOf(scheduleDTO.getEndTime())),
+                    scheduleDTO.getDays() // Set the days here
+            ));
+        }
+
+        return Employee.builder()
+                .name(dto.getName())
+                .skills(dto.getSkills())
+                .domain(dto.getDomain())
+                .schedules(availabilities)
+                .build();
     }
+
+
 
 
     /*private static Shift getShift(ShiftDTO dto) {

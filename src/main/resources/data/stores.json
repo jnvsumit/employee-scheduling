@@ -1,14 +1,14 @@
 [
   {
-    "name": "FRUIT STORE",
-    "store_type": "FRUIT",
+    "name": "HIPER NOYA",
+    "store_type": "Retail",
     "required_shifts": [
       {
         "start_time": "08:00",
         "end_time": "15:00",
-        "employee_count": 2,
         "required_skills": [
           {
+<<<<<<< Updated upstream
             "skill_name": "MANAGER",
             "minimum_employee_count": 1
           },
@@ -61,7 +61,20 @@
         "required_skills": [
           {
             "skill_name": "SELLER",
+=======
+            "skill_name": "FRUIT_SELLER",
+>>>>>>> Stashed changes
             "minimum_employee_count": 2
+          }
+        ]
+      },
+      {
+        "start_time": "15:00",
+        "end_time": "22:00",
+        "required_skills": [
+          {
+            "skill_name": "FRUIT_SELLER",
+            "minimum_employee_count": 1
           }
         ]
       }
