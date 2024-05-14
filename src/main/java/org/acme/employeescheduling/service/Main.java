@@ -80,20 +80,17 @@ public class Main {
         while (!dateIterator.isAfter(endDate)) {
             for (EmployeesScheduleDTO employee : employees) {
                 List<EmployeeScheduleDTO> schedules = employee.getSchedules();
-                ScheduleDTO schedule = schedules.get(weekCount % schedules.size()).getSchedule().get(0); // Rotate through schedules
+                logger.log(Level.INFO,"schedulessgjsdgyug45678" +schedules.toString());
+                EmployeeScheduleDTO schedule = schedules.get(weekCount % schedules.size());// Rotate through schedules
                 List<String> scheduleDays = schedule.getDays();
 
                 if (scheduleDays.contains(dateIterator.getDayOfWeek().toString())) {
-                    logger.log(Level.INFO,"Available\n");
 
-                    logger.log(Level.INFO,"------------->"+employee+"\n\n"+dateIterator);
-                    availabilities.add(createAvailability(employee, dateIterator, schedule.getStartTime(), schedule.getEndTime()));
+                   // availabilities.add(createAvailability(employee, dateIterator, schedule.getStartTime(), schedule.getEndTime()));
                 } else {
-                    logger.log(Level.INFO,"Unavailable\n");
 
-                    logger.log(Level.INFO,"------------->"+employee+"\n\n"+dateIterator);
 
-                    availabilities.add(createUnavailableAvailability(employee, dateIterator,schedule.getStartTime(), schedule.getEndTime()));
+                   // availabilities.add(createUnavailableAvailability(employee, dateIterator,schedule.getStartTime(), schedule.getEndTime()));
                 }
             }
 
@@ -136,23 +133,6 @@ public class Main {
         return availability;
     }
 
-    // Get the schedule for the specified day of the week from the employee schedule DTO
-    private static ScheduleDTO getScheduleForDay(EmployeesScheduleDTO employeesScheduleDTO, DayOfWeek dayOfWeek, int scheduleIndex) {
-        for (EmployeeScheduleDTO scheduleDTO : employeesScheduleDTO.getSchedules()) {
-            for (ScheduleDTO schedule : scheduleDTO.getSchedule()) {
-                if (schedule.getDays().contains(dayOfWeek.toString())) {
-                    // Check if the schedule index is within bounds
-                    if (scheduleIndex >= 0 && scheduleIndex < scheduleDTO.getSchedule().size()) {
-                        return scheduleDTO.getSchedule().get(scheduleIndex);
-                    } else {
-                        // Handle the case where the index is out of bounds
-                        return null; // Or throw an exception or handle it according to your requirement
-                    }
-                }
-            }
-        }
-        return null;
-    }
 
     private static List<Department> mapToStores(List<DepartmentDTO> departmentDTOs) {
         List<Department> departments = new ArrayList<>();

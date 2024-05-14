@@ -35,7 +35,7 @@ public class EmployeesScheduleMapper {
                 .build();
     }
 
-    private static List<Availability> getAvailabilities(List<EmployeesScheduleDTO> dto) {
+   /* private static List<Availability> getAvailabilities(List<EmployeesScheduleDTO> dto) {
         return dto.stream().map(e -> {
 //            logger.log(Level.INFO, "Converting EmployeesScheduleDTO to Employee: " + e.toString());
 
@@ -48,7 +48,7 @@ public class EmployeesScheduleMapper {
 //                    .availabilityOnDay(getAvailabilityOnDay(e))
                     .build();
         }).collect(Collectors.toList());
-    }
+    }*/
 
     public static List<Employee> getEmployees(List<EmployeesScheduleDTO> dto) {
         logger.log(Level.INFO, "EmployeesScheduleDTO to Employee: " + dto.toString());
@@ -65,18 +65,10 @@ public class EmployeesScheduleMapper {
 */
     private static Employee getEmployee(EmployeesScheduleDTO dto) {
 
-//        logger.info("Scheduless------: " + dto.getSchedules().stream()
-//                .flatMap(scheduleDTO -> scheduleDTO.getSchedule().stream().toList().stream())+"\n");
-//        logger.log(Level.INFO, "Employee schedule 1: " + dto.getSchedules().get(0));
-//        logger.log(Level.INFO, "Employee schedule 2: " + dto.getSchedules().get(1).toString());
-
-//        logger.log(Level.INFO, "Employee: " + dto.getSchedules().get(0).getSchedule().get(1).toString());
-
-
 List<Schedule> availabilities = new ArrayList<>();
-availabilities.add(new Schedule(DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getStartTime()),DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getEndTime())));
+availabilities.add(new Schedule(DateTimeUtil.toLocalTime(String.valueOf(dto.getSchedules().get(0).getStartTime())),DateTimeUtil.toLocalTime(String.valueOf(dto.getSchedules().get(0).getEndTime()))));
 if(dto.getSchedules().size()>1){
-    availabilities.add(new Schedule(DateTimeUtil.toLocalTime(dto.getSchedules().get(1).getSchedule().get(0).getStartTime()),DateTimeUtil.toLocalTime(dto.getSchedules().get(1).getSchedule().get(0).getEndTime())));
+    availabilities.add(new Schedule(DateTimeUtil.toLocalTime(String.valueOf(dto.getSchedules().get(1).getStartTime())),DateTimeUtil.toLocalTime(String.valueOf(dto.getSchedules().get(1).getEndTime()))));
 }
 
         return Employee
@@ -111,15 +103,15 @@ if(dto.getSchedules().size()>1){
                 .build();
     }*/
 
-    private static LocalTime getStartTime(EmployeesScheduleDTO dto) {
-        return DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getStartTime());
+   /* private static LocalTime getStartTime(EmployeesScheduleDTO dto) {
+        return DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getStartTime());
     }
 
     private static LocalTime getEndTime(EmployeesScheduleDTO dto) {
-        return DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getSchedule().get(0).getEndTime());
-    }
+        return DateTimeUtil.toLocalTime(dto.getSchedules().get(0).getEndTime());
+    }*/
 
-    private static Set<AvailabilityOnDay> getAvailabilityOnDay(EmployeesScheduleDTO dto) {
+   /* private static Set<AvailabilityOnDay> getAvailabilityOnDay(EmployeesScheduleDTO dto) {
 //        logger.log(Level.INFO,"employees schedule dto-------"+dto);
 
 //        return dto.getSchedules().get(0).getSchedule().get(0).getDays().stream().map(AvailabilityOnDay::valueOf).collect(Collectors.toSet());
@@ -128,5 +120,5 @@ if(dto.getSchedules().size()>1){
                 .flatMap(shiftDTO -> shiftDTO.getDays().stream())
                 .map(AvailabilityOnDay::valueOf)
                 .collect(Collectors.toSet());
-    }
+    }*/
 }

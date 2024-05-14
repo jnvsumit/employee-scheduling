@@ -40,7 +40,7 @@ public class DataService {
 
     private List<EmployeesScheduleDTO> getEmployeeSchedules() throws Exception {
         try {
-            String data = DataUtil.getDataFromFile("data/employee.json");
+            String data = DataUtil.getDataFromFile("data/employee2.json");
 
             EmployeesScheduleDTO[] scheduleDTOS = JsonUtil.deserialize(data, EmployeesScheduleDTO[].class);
 //           for(EmployeesScheduleDTO employeesScheduleDTO :scheduleDTOS){

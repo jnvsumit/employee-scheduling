@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Builder
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Schedule {
     public LocalTime getStartTime() {
         return startTime;
@@ -26,10 +26,10 @@ public class Schedule {
         this.endTime = endTime;
     }
 
-    //    private List<String> days;
-    private LocalTime startTime;
-    private LocalTime endTime;
 
+    public LocalTime startTime;
+    public LocalTime endTime;
+    public List<String> days;
     public Schedule(LocalTime startTime, LocalTime endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
