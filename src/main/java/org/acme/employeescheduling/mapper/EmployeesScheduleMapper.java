@@ -78,6 +78,7 @@ public class EmployeesScheduleMapper {
     private static Employee getEmployee(EmployeeDTO dto) {
         return Employee
                 .builder()
+                .id(UUID.randomUUID())
                 .name(dto.getName())
                 .skills(dto.getSkills().stream().map(Skill::valueOf).collect(Collectors.toSet()))
                 .department(Department.valueOf(dto.getDomain()))

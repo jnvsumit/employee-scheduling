@@ -35,6 +35,13 @@ public class EmployeeSchedule {
 
     private SolverStatus solverStatus;
 
+    public EmployeeSchedule(ScheduleState scheduleState, List<Availability> availabilities, List<Employee> employees, List<Shift> shifts) {
+        this.scheduleState = scheduleState;
+        this.availabilities = availabilities;
+        this.employees = employees;
+        this.shifts = shifts;
+    }
+
     public EmployeeSchedule(HardSoftScore score, SolverStatus solverStatus) {
         this.score = score;
         this.solverStatus = solverStatus;

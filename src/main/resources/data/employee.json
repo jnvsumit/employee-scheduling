@@ -4,24 +4,22 @@
     "position": "HEAD OF FRUIT",
     "domain": "FRUIT",
     "skills": [
-      "MANAGER"
+      "MANAGER",
+      "SELLER"
     ],
     "schedules": [
       {
         "days": [
-          "MO",
           "TU",
           "WE",
           "TH",
-          "FR",
-          "SA"
+          "FR"
         ],
         "start_time": "08:00",
         "end_time": "15:00"
       },
       {
         "days": [
-          "MO",
           "TU",
           "WE",
           "TH",
@@ -34,44 +32,45 @@
     ]
   },
   {
-    "name": "AXB",
-    "position": "HEAD OF MEAT",
-    "domain": "MEAT",
-    "skills": [
-      "MANAGER"
-    ],
-    "schedules": [
-      {
-        "days": [
-          "MO",
-          "TU",
-          "WE",
-          "TH",
-          "FR",
-          "SA"
-        ],
-        "start_time": "08:00",
-        "end_time": "15:00"
-      },
-      {
-        "days": [
-          "MO",
-          "TU",
-          "WE",
-          "TH",
-          "FR",
-          "SA"
-        ],
-        "start_time": "15:00",
-        "end_time": "22:00"
-      }
-    ]
-  },
-  {
-    "name": "BSS",
-    "position": "SALESMAN FRUIT",
+    "name": "Bipin",
+    "position": "HEAD OF FRUIT",
     "domain": "FRUIT",
     "skills": [
+      "MANAGER",
+      "SELLER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      }
+    ]
+  },
+  {
+    "name": "Rohan",
+    "position": "HEAD OF FRUIT",
+    "domain": "FRUIT",
+    "skills": [
+      "MANAGER",
       "SELLER"
     ],
     "schedules": [
@@ -85,13 +84,79 @@
           "SA"
         ],
         "start_time": "08:00",
-        "end_time": "13:00"
+        "end_time": "15:00"
       },
       {
         "days": [
           "MO",
           "TU",
           "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      }
+    ]
+  },
+  {
+    "name": "Superman",
+    "position": "HEAD OF MEAT",
+    "domain": "MEAT",
+    "skills": [
+      "MANAGER",
+      "CHOPPER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      }
+    ]
+  },
+  {
+    "name": "Abhishek",
+    "position": "SALESMAN FRUIT",
+    "domain": "FRUIT",
+    "skills": [
+      "SELLER",
+      "CASHIER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
           "TH",
           "FR",
           "SA"
@@ -106,25 +171,24 @@
     "position": "SALESMAN FRUIT",
     "domain": "FRUIT",
     "skills": [
-      "SELLER"
+      "SELLER",
+      "MANAGER"
     ],
     "schedules": [
       {
         "days": [
           "MO",
-          "TU",
           "WE",
           "TH",
           "FR",
           "SA"
         ],
         "start_time": "08:00",
-        "end_time": "13:00"
+        "end_time": "15:00"
       },
       {
         "days": [
           "MO",
-          "TU",
           "WE",
           "TH",
           "FR",
@@ -170,11 +234,12 @@
     ]
   },
   {
-    "name": "PQR",
+    "name": "Prabhakar",
     "position": "SALESMAN FRUIT",
     "domain": "FRUIT",
     "skills": [
-      "SELLER"
+      "SELLER",
+      "MANAGER"
     ],
     "schedules": [
       {
@@ -204,11 +269,45 @@
     ]
   },
   {
-    "name": "IRF",
+    "name": "Munsi",
     "position": "SALESMAN MEAT",
     "domain": "MEAT",
     "skills": [
-      "SELLER"
+      "SELLER",
+      "MANAGER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      }
+    ]
+  },
+  {
+    "name": "Zishan",
+    "position": "SALESMAN MEAT",
+    "domain": "MEAT",
+    "skills": [
+      "SELLER",
+      "MANAGER"
     ],
     "schedules": [
       {
@@ -220,9 +319,32 @@
           "FR",
           "SA"
         ],
-        "start_time": "15:10",
+        "start_time": "15:00",
         "end_time": "22:00"
       },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "TU",
+          "WE",
+          "TH",
+          "FR"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      }
+    ]
+  },
+  {
+    "name": "Gaurav",
+    "position": "SALESMAN MEAT",
+    "domain": "MEAT",
+    "skills": [
+      "SELLER",
+      "MANAGER"
+    ],
+    "schedules": [
       {
         "days": [
           "MO",
@@ -232,8 +354,20 @@
           "FR",
           "SA"
         ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "TU",
+          "WE",
+          "TH",
+          "FR"
+        ],
         "start_time": "08:00",
-        "end_time": "14:45"
+        "end_time": "15:00"
       }
     ]
   },
@@ -272,16 +406,17 @@
     ]
   },
   {
-    "name": "RLO",
+    "name": "Ganesh",
     "position": "SALESMAN MEAT",
     "domain": "MEAT",
     "skills": [
-      "SELLER"
+      "SELLER",
+      "CHOPPER",
+      "MANAGER"
     ],
     "schedules": [
       {
         "days": [
-          "MO",
           "TU",
           "WE",
           "TH",
@@ -293,7 +428,6 @@
       },
       {
         "days": [
-          "MO",
           "TU",
           "WE",
           "TH",
@@ -301,7 +435,7 @@
           "SA"
         ],
         "start_time": "08:00",
-        "end_time": "13:00"
+        "end_time": "15:00"
       }
     ]
   },
@@ -310,7 +444,8 @@
     "position": "HEAD OF MEAT",
     "domain": "MEAT",
     "skills": [
-      "MANAGER"
+      "MANAGER",
+      "CHOPPER"
     ],
     "schedules": [
       {
@@ -319,8 +454,7 @@
           "TU",
           "WE",
           "TH",
-          "FR",
-          "SA"
+          "FR"
         ],
         "start_time": "08:00",
         "end_time": "15:00"
@@ -331,8 +465,7 @@
           "TU",
           "WE",
           "TH",
-          "FR",
-          "SA"
+          "FR"
         ],
         "start_time": "15:00",
         "end_time": "22:00"
@@ -364,6 +497,40 @@
           "MO",
           "TU",
           "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      }
+    ]
+  },
+  {
+    "name": "Anant",
+    "position": "HEAD OF MEAT",
+    "domain": "MEAT",
+    "skills": [
+      "MANAGER",
+      "CHOPPER",
+      "SELLER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "TU",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
           "TH",
           "FR",
           "SA"

@@ -40,7 +40,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Tag(name = "Employee Schedules", description = "Employee Schedules service for assigning employees to shifts.")
-@Path("get-schedules")
+@Path("schedules")
 public class EmployeeScheduleResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeScheduleResource.class);

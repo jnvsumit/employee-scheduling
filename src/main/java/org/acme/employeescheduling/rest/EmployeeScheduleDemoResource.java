@@ -3,6 +3,7 @@ package org.acme.employeescheduling.rest;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -16,6 +17,10 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 @Tag(name = "Demo data", description = "Data from resources folder")
 @Path("get-data")
 public class EmployeeScheduleDemoResource {
@@ -27,13 +32,20 @@ public class EmployeeScheduleDemoResource {
         this.dataService = dataService;
     }
 
+    @Operation(summary = "List demo data.")
+    @GET
+    public Object[] list() {
+        return List.of("LARGE", "SMALL").toArray();
+    }
+
     @APIResponses(value = {
             @APIResponse(responseCode = "200", description = "Unsolved demo schedule.",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(implementation = EmployeeSchedule.class)))})
     @Operation(summary = "Find an unsolved schedule")
     @GET
-    public Response getData(@QueryParam("start_date") final String startDate, @QueryParam("end_date") final String endDate) {
+    @Path("{dataType}")
+    public Response getData(@PathParam(value = "dataType") final String dataType, @QueryParam("start_date") final String startDate, @QueryParam("end_date") final String endDate) {
         return Response.ok(dataService.getEmployeeSchedule(startDate, endDate)).build();
     }
 }

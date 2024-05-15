@@ -16,6 +16,8 @@ import org.acme.employeescheduling.domain.enums.Skill;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
+    private UUID id;
+
     @PlanningId
     private String name;
 

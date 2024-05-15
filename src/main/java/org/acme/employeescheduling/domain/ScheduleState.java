@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public class ScheduleState {
 
     private String tenantId;
@@ -21,13 +23,13 @@ public class ScheduleState {
     private LocalDate lastHistoricDate;
 
     @JsonIgnore
-    public boolean isHistoric(LocalDateTime time) {
-        return time.toLocalTime().isBefore(LocalTime.MIDNIGHT);
+    public boolean isHistoric(LocalDateTime dateTime) {
+        return dateTime.isBefore(getFirstPublishedDate().atTime(LocalTime.MIDNIGHT));
     }
 
     @JsonIgnore
     public boolean isDraft(LocalDateTime dateTime) {
-        return !dateTime.toLocalTime().isBefore(LocalTime.MIDNIGHT);
+        return !dateTime.isBefore(getFirstDraftDate().atTime(LocalTime.MIDNIGHT));
     }
 
     @JsonIgnore

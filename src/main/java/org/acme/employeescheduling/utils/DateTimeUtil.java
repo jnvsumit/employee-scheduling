@@ -1,9 +1,9 @@
 package org.acme.employeescheduling.utils;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 
 public class DateTimeUtil {
 
@@ -15,5 +15,15 @@ public class DateTimeUtil {
 
     public static LocalDateTime toLocalDateTime(String dateStr) {
         return LocalDate.parse(dateStr).atStartOfDay();
+    }
+
+    public static int getISTWeekNumber(LocalDateTime localDateTime) {
+        ZoneId istZone = ZoneId.of("Asia/Kolkata");
+        WeekFields weekFields = WeekFields.of(Locale.ENGLISH);
+        return localDateTime.atZone(istZone).get(weekFields.weekOfWeekBasedYear());
+    }
+
+    public static DayOfWeek getDayOfWeek(LocalDateTime localDateTime) {
+        return localDateTime.getDayOfWeek();
     }
 }

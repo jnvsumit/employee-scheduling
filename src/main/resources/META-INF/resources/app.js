@@ -102,7 +102,7 @@ function setupAjax() {
 }
 
 function fetchDemoData() {
-    $.get("/get-data?start_date=2024-06-12&end_date=2024-06-30", function (data) {
+    $.get("/get-data", function (data) {
         // load first data set
         demoDataId = data[0];
         refreshSchedule();
@@ -149,7 +149,7 @@ function refreshSchedule() {
             return;
         }
 
-        path = "/get-data/" + demoDataId;
+        path = `/get-data/${demoDataId}?start_date=2024-06-12&end_date=2024-06-30`;
     }
     $.getJSON(path, function (schedule) {
         loadedSchedule = schedule;
@@ -191,19 +191,23 @@ function renderSchedule(schedule) {
     byLocationTimeline.setCustomTime(schedule.scheduleState.firstDraftDate, 'draft');
 
     schedule.availabilities.forEach((availability, index) => {
-        const availabilityDate = JSJoda.LocalDate.parse(availability.date);
-        const start = availabilityDate.atStartOfDay().toString();
-        const end = availabilityDate.plusDays(1).atStartOfDay().toString();
-        const byEmployeeShiftElement = $(`<div/>`)
-            .append($(`<h5 class="card-title mb-1"/>`).text(availability.availabilityType));
-        const mapKey = availability.employee.name + '-' + availabilityDate.toString();
-        availabilityMap.set(mapKey, availability.availabilityType);
-        byEmployeeItemDataSet.add({
-            id: 'availability-' + index, group: availability.employee.name,
-            content: byEmployeeShiftElement.html(),
-            start: start, end: end,
-            type: "background",
-            style: "opacity: 0.5; background-color: " + getAvailabilityColor(availability.availabilityType),
+        availability.schedules.forEach((s, ind) => {
+            const start = s.start.toString();
+            const end = s.endTime.toString();
+            const byEmployeeShiftElement = $(`<div/>`)
+                .append($(`<h5 class="card-title mb-1"/>`).text("DESIRED"));
+            const mapKey = availability.employee.name + '-' + start;
+            availabilityMap.set(mapKey, "DESIRED");
+
+            byEmployeeItemDataSet.add({
+                id: 'availability-' + index + ":" + ind,
+                group: availability.employee.name,
+                content: byEmployeeShiftElement.html(),
+                start: start,
+                end: end,
+                type: "background",
+                style: "opacity: 0.5; background-color: " + getAvailabilityColor("DESIRED"),
+            });
         });
     });
 
@@ -213,16 +217,16 @@ function renderSchedule(schedule) {
             .append($(`<h5 class="card-title mb-2"/>)`)
                 .append(employee.name))
             .append($('<div/>')
-                .append($(employee.skills.map(skill => `<span class="badge me-1 mt-1" style="background-color:#d3d7cf">${skill}</span>`).join(''))));
+                .append($(employee.skills.map(skill => `<span class="badge me-1 mt-1" style="background-color:#d3d7cf">${employee.department} ${skill}</span>`).join(''))));
         byEmployeeGroupDataSet.add({id: employee.name, content: employeeGroupElement.html()});
     });
 
     schedule.shifts.forEach((shift, index) => {
-        if (groups.indexOf(shift.location) === -1) {
-            groups.push(shift.location);
+        if (groups.indexOf(shift.department) === -1) {
+            groups.push(shift.department);
             byLocationGroupDataSet.add({
-                id: shift.location,
-                content: shift.location,
+                id: shift.department,
+                content: shift.department,
             });
         }
 
@@ -236,9 +240,11 @@ function renderSchedule(schedule) {
                     .append($(`<span class="badge me-1 mt-1" style="background-color:#d3d7cf">${shift.requiredSkill}</span>`)));
 
             byLocationItemDataSet.add({
-                id: 'shift-' + index, group: shift.location,
+                id: 'shift-' + index,
+                group: shift.department,
                 content: byLocationShiftElement.html(),
-                start: shift.start, end: shift.end,
+                start: shift.start,
+                end: shift.end,
                 style: "background-color: #EF292999"
             });
         } else {
@@ -256,15 +262,19 @@ function renderSchedule(schedule) {
 
             const shiftColor = getShiftColor(shift, availabilityMap);
             byEmployeeItemDataSet.add({
-                id: 'shift-' + index, group: shift.employee.name,
+                id: 'shift-' + index,
+                group: shift.employee.name,
                 content: byEmployeeShiftElement.html(),
-                start: shift.start, end: shift.end,
+                start: shift.start,
+                end: shift.end,
                 style: "background-color: " + shiftColor
             });
             byLocationItemDataSet.add({
-                id: 'shift-' + index, group: shift.location,
+                id: 'shift-' + index,
+                group: shift.location,
                 content: byLocationShiftElement.html(),
-                start: shift.start, end: shift.end,
+                start: shift.start,
+                end: shift.end,
                 style: "background-color: " + shiftColor
             });
         }
@@ -281,7 +291,7 @@ function renderSchedule(schedule) {
 }
 
 function solve() {
-    $.post("/schedules", JSON.stringify(loadedSchedule), function (data) {
+    $.post("/schedules?start_date=2024-06-12&end_date=2024-06-30", JSON.stringify(loadedSchedule), function (data) {
         scheduleId = data;
         refreshSolvingButtons(true);
     }).fail(function (xhr, ajaxOptions, thrownError) {
