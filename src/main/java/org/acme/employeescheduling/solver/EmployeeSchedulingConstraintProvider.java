@@ -7,11 +7,13 @@ import ai.timefold.solver.core.api.score.stream.ConstraintProvider;
 import ai.timefold.solver.core.api.score.stream.Joiners;
 import org.acme.employeescheduling.domain.Availability;
 import org.acme.employeescheduling.domain.AvailabilityType;
+import org.acme.employeescheduling.domain.Employee;
 import org.acme.employeescheduling.domain.Shift;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Set;
 
 public class EmployeeSchedulingConstraintProvider implements ConstraintProvider {
 
@@ -42,11 +44,23 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
         };
     }
 
-    Constraint domainMappedStoreName(ConstraintFactory constraintFactory){
+    /*Constraint domainMappedStoreName(ConstraintFactory constraintFactory){
         return constraintFactory.forEach(Shift.class)
                 .filter(shift -> !shift.getStoreType().equals(shift.getEmployee().getDomain()))
                 .penalize(HardSoftScore.ONE_HARD)
                 .asConstraint("Unmatched domain and StoreName");
+    }*/
+    Constraint domainMappedStoreName(ConstraintFactory constraintFactory) {
+        return constraintFactory.forEach(Shift.class)
+                .filter(shift -> {
+                    Employee employee = shift.getEmployee();
+                    if (employee == null) {
+                        return true; // No employee assigned; constraint satisfied
+                    }
+                    return !shift.getStoreType().equals(employee.getDomain()) || !employee.getSkills().contains(shift.getRequiredSkill());
+                })
+                .penalize(HardSoftScore.ONE_HARD)
+                .asConstraint("Unmatched domain and StoreName or Missing required skill");
     }
 //    Constraint matchShiftStartTimeWithEmployeeAvailability(ConstraintFactory constraintFactory) {
 //        return constraintFactory.forEach(Shift.class)
@@ -69,13 +83,19 @@ public class EmployeeSchedulingConstraintProvider implements ConstraintProvider 
                 .asConstraint("Overlapping shift");
     }
 
-    Constraint requiredSkill(ConstraintFactory constraintFactory) {
+    /*Constraint requiredSkill(ConstraintFactory constraintFactory) {
         return constraintFactory.forEach(Shift.class)
                 .filter(shift -> !shift.getEmployee().getSkills().contains(shift.getRequiredSkill()))
                 .penalize(HardSoftScore.ONE_HARD)
                 .asConstraint("Missing required skill");
-    }
+    }*/
 
+    Constraint requiredSkill(ConstraintFactory constraintFactory) {
+        return constraintFactory.forEach(Shift.class)
+                .filter(shift -> shift.getEmployee() != null && !shift.getEmployee().getSkills().contains(shift.getRequiredSkill()))
+                .penalize(HardSoftScore.ONE_HARD)
+                .asConstraint("Missing required skill");
+    }
 
     Constraint atLeast10HoursBetweenTwoShifts(ConstraintFactory constraintFactory) {
         return constraintFactory.forEachUniquePair(Shift.class,

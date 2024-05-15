@@ -47,7 +47,7 @@ public class Main {
          Type storeListType = new TypeToken<List<DepartmentDTO>>() {
          }.getType();
          List<DepartmentDTO> storeDTOs = gson.fromJson(jsonData, storeListType);
-         logger.log(Level.INFO,"Store dto in main .java"+storeDTOs);
+//         logger.log(Level.INFO,"Store dto in main .java"+storeDTOs);
          // Map DTOs to Store class
          List<Department> stores = mapToStores(storeDTOs);
 
@@ -80,7 +80,7 @@ public class Main {
         while (!dateIterator.isAfter(endDate)) {
             for (EmployeesScheduleDTO employee : employees) {
                 List<ScheduleDTO> schedules = employee.getSchedules();
-                logger.log(Level.INFO,"schedulessgjsdgyug45678" +schedules.toString());
+//                logger.log(Level.INFO,"schedulessgjsdgyug45678" +schedules.toString());
 //                EmployeeScheduleDTO schedule = schedules.get(weekCount % schedules.size());// Rotate through schedules
 //                List<String> scheduleDays = schedule.getDays();
 
@@ -161,7 +161,7 @@ public class Main {
             department.setRequiredShifts(requiredShifts);
             departments.add(department);
         }
-        logger.log(Level.INFO,departments.toString());
+//        logger.log(Level.INFO,departments.toString());
         return departments;
     }
 
@@ -170,7 +170,7 @@ public class Main {
 
         List<Shift> allShifts = new LinkedList<>();
 
-        System.out.println("\n"+"Day of week ---"+day+"\n");
+//        System.out.println("\n"+"Day of week ---"+day+"\n");
 
 //        LocalDate currentDate = LocalDate.now();
 

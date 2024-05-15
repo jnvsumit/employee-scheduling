@@ -45,7 +45,7 @@ public class EmployeesScheduleMapper {
     }*/
 
    public static List<Employee> getEmployees(List<EmployeesScheduleDTO> dto) {
-        logger.log(Level.INFO, "EmployeesScheduleDTO to Employee: " + dto.toString());
+//        logger.log(Level.INFO, "EmployeesScheduleDTO to Employee: " + dto.toString());
 //
         return dto.stream().map(EmployeesScheduleMapper::getEmployee).collect(Collectors.toList());
     }

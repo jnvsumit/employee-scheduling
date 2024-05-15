@@ -2,7 +2,7 @@
   {
     "name": "BSS",
     "position": "FRUIT_SELLER",
-    "domain": "Retail",
+    "domain": "FRUIT",
     "skills": [
       "FRUIT_SELLER"
     ],
@@ -36,7 +36,7 @@
   {
     "name": "IRF",
     "position": "FRUIT_SELLER",
-    "domain": "Retail",
+    "domain": "FRUIT",
     "skills": [
       "FRUIT_SELLER"
     ],
@@ -70,9 +70,145 @@
   {
     "name": "RLO",
     "position": "FRUIT_SELLER",
-    "domain": "Retail",
+    "domain": "FRUIT",
     "skills": [
       "FRUIT_SELLER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      }
+    ]
+  },
+  {
+    "name": "GRE",
+    "position": "MEAT_SELLER",
+    "domain": "MEAT",
+    "skills": [
+      "MEAT_SELLER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      }
+    ]
+  },
+  {
+    "name": "ALC",
+    "position": "MEAT_SELLER",
+    "domain": "MEAT",
+    "skills": [
+      "MEAT_SELLER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      }
+    ]
+  },
+  {
+    "name": "SFC",
+    "position": "MEAT_SELLER",
+    "domain": "MEAT",
+    "skills": [
+      "MEAT_SELLER"
+    ],
+    "schedules": [
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "08:00",
+        "end_time": "15:00"
+      },
+      {
+        "days": [
+          "MO",
+          "TU",
+          "WE",
+          "TH",
+          "FR",
+          "SA"
+        ],
+        "start_time": "15:00",
+        "end_time": "22:00"
+      }
+    ]
+  },
+  {
+    "name": "AMG",
+    "position": "MEAT_SELLER",
+    "domain": "MEAT",
+    "skills": [
+      "MEAT_SELLER"
     ],
     "schedules": [
       {
