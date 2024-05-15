@@ -28,8 +28,8 @@ public class DataService {
 
 
 //            List<ShiftDTO> shiftDTOS = getShifts();
-//            List<Shift> assignedShifts = EmployeeScheduler.scheduleShifts(employeesScheduleDTOS,shifts);
-            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, shifts,availabilities);
+            List<Shift> assignedShifts = EmployeeScheduler.assignShifts(employeesScheduleDTOS,shifts);
+            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, assignedShifts,availabilities);
 //            return null;
         } catch (Exception e) {
             LOGGER.error("Something went wrong", e);
