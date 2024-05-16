@@ -111,27 +111,27 @@ public class Main {
         return availabilities;
     }
 
-    private static Availability createAvailability(EmployeesScheduleDTO employeesScheduleDTO, LocalDate date, String startTime, String endTime) {
-        Availability availability = new Availability();
-        availability.setEmployee(new Employee(employeesScheduleDTO.getName() ,employeesScheduleDTO.getSkills(),employeesScheduleDTO.getDomain(),null));
-        availability.setDate(date);
-        availability.setStartTime(LocalTime.parse(startTime));
-        availability.setEndTime(LocalTime.parse(endTime));
-        availability.setAvailabilityType(AvailabilityType.DESIRED);
-//        availability.setId(Availability.generateId());
-        return availability;
-    }
+//    private static Availability createAvailability(EmployeesScheduleDTO employeesScheduleDTO, LocalDate date, String startTime, String endTime) {
+//        Availability availability = new Availability();
+//        availability.setEmployee(new Employee(employeesScheduleDTO.getName() ,employeesScheduleDTO.getSkills(),employeesScheduleDTO.getDomain(),null));
+//        availability.setDate(date);
+//        availability.setStartTime(LocalTime.parse(startTime));
+//        availability.setEndTime(LocalTime.parse(endTime));
+//        availability.setAvailabilityType(AvailabilityType.DESIRED);
+////        availability.setId(Availability.generateId());
+//        return availability;
+//    }
 
-    private static Availability createUnavailableAvailability(EmployeesScheduleDTO employeesScheduleDTO, LocalDate date, String startTime, String endTime) {
-        Availability availability = new Availability();
-        availability.setEmployee(new Employee(employeesScheduleDTO.getName() ,employeesScheduleDTO.getSkills(),employeesScheduleDTO.getDomain(),null));
-        availability.setDate(date);
-        availability.setStartTime(LocalTime.parse(startTime));
-        availability.setEndTime(LocalTime.parse(endTime));
-        availability.setAvailabilityType(AvailabilityType.UNAVAILABLE);
-//        availability.setId(Availability.generateId());
-        return availability;
-    }
+//    private static Availability createUnavailableAvailability(EmployeesScheduleDTO employeesScheduleDTO, LocalDate date, String startTime, String endTime) {
+//        Availability availability = new Availability();
+//        availability.setEmployee(new Employee(employeesScheduleDTO.getName() ,employeesScheduleDTO.getSkills(),employeesScheduleDTO.getDomain(),null));
+//        availability.setDate(date);
+//        availability.setStartTime(LocalTime.parse(startTime));
+//        availability.setEndTime(LocalTime.parse(endTime));
+//        availability.setAvailabilityType(AvailabilityType.UNAVAILABLE);
+////        availability.setId(Availability.generateId());
+//        return availability;
+//    }
 
 
     private static List<Department> mapToStores(List<DepartmentDTO> departmentDTOs) {

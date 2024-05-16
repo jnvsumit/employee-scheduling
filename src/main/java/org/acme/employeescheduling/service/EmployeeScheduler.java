@@ -148,20 +148,22 @@ public class EmployeeScheduler {
         return shifts;
     }*/
     public static List<Shift> assignShifts(List<EmployeesScheduleDTO> employees, List<Shift> shifts) {
-        logger.log(Level.INFO,"Employees "+employees);
-        logger.log(Level.INFO,"\n\nShifts "+shifts);
+//        logger.log(Level.INFO, "Employees " + employees);
+//        logger.log(Level.INFO, "\n\nShifts " + shifts);
 
         List<Shift> list = new ArrayList<>();
         Map<String, LocalDate> employeeScheduleStartDate = new HashMap<>(); // Track the start date of the current schedule for each employee
 
 
         for (EmployeesScheduleDTO employee : employees) {
-            List <ScheduleDTO> sch = employee.getSchedules();
+            List<ScheduleDTO> sch = employee.getSchedules();
             Map<String, Integer> indexMap = new HashMap<>();
-            for(int i=0;i<sch.size();i++){
-                indexMap.put(sch.get(i).getStartTime(),i);
+            for (int i = 0; i < sch.size(); i++) {
+                indexMap.put(sch.get(i).getStartTime(), i);
             }
-//            logger.log(Level.INFO, employee.toString() + "....employee");
+
+
+//            logger.log(Level.INFO, employee.toString() + "....employee\n\n");
             Set<LocalDate> assignedDates = new HashSet<>(); // To keep track of dates on which the employee is already assigned a shift
 
             // Initialize the current schedule index for the employee
@@ -170,9 +172,13 @@ public class EmployeeScheduler {
             LocalDate scheduleStartDate = null;
 
             for (Shift shift : shifts) {
+
                 String shiftStartTime = shift.getStart().toLocalTime().toString();
                 int indexOfStart = indexMap.get(shiftStartTime);
 //                logger.log(Level.INFO,"indexOfStart ------------>"+indexOfStart);
+
+//                logger.log(Level.INFO, shift.toString()+"........shifts.....");
+
                 if (shift.getEmployee() == null) {
                     LocalDate shiftDate = shift.getStart().toLocalDate();
                     if (!assignedDates.contains(shiftDate)) {
@@ -188,7 +194,7 @@ public class EmployeeScheduler {
                                 employeeScheduleStartDate.put(employee.getName(), scheduleStartDate);
                             }
                         }
-                        logger.log(Level.INFO,"Employee" + employee + "\n" + indexOfStart + "\n" + shift);
+//                        logger.log(Level.INFO, "Employee" + employee + "\n" + indexOfStart + "\n" + shift);
 
                         ScheduleDTO schedule = employee.getSchedules().get(indexOfStart);
                         String[] days = schedule.getDays().toArray(new String[0]);
@@ -207,10 +213,6 @@ public class EmployeeScheduler {
                                 assignedDates.add(shiftDate); // Mark this date as assigned for the employee
 //                                logger.log(Level.INFO, "-hcvahgdghvc----------------------------");
                             }
-                            else{
-//                                logger.log(Level.INFO,"Unassigned Shift in else"+shift);
-//                                logger.log(Level.INFO,"Unassigned Employee in else"+employee);
-                            }
 
                             /*logger.log(Level.INFO, "shift.getStart().toString()" + shift.getStart().toLocalTime().toString());
                             logger.log(Level.INFO, "startTime" + startTime);
@@ -225,10 +227,12 @@ public class EmployeeScheduler {
             }
         }
 
+//        for (Shift shift : shifts) {
+//            logger.log(Level.INFO, shift.toString() + "........shifts.....");
+//        }
+
         return shifts;
     }
 
 
-
 }
-

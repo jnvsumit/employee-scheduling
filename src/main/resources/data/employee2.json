@@ -3,6 +3,10 @@
     "name": "BSS",
     "position": "FRUIT_SELLER",
     "domain": "FRUIT",
+    "vacation" : [
+      "2024-05-20",
+      "2024-05-30"
+    ],
     "skills": [
       "FRUIT_SELLER"
     ],
@@ -37,6 +41,8 @@
     "name": "IRF",
     "position": "FRUIT_SELLER",
     "domain": "FRUIT",
+    "vacation" : [
+    ],
     "skills": [
       "FRUIT_SELLER"
     ],
@@ -71,6 +77,8 @@
     "name": "RLO",
     "position": "FRUIT_SELLER",
     "domain": "FRUIT",
+    "vacation" : [
+    ],
     "skills": [
       "FRUIT_SELLER"
     ],
@@ -105,6 +113,10 @@
     "name": "GRE",
     "position": "MEAT_SELLER",
     "domain": "MEAT",
+    "vacation" : [
+      "2024-05-20",
+      "2024-05-30"
+    ],
     "skills": [
       "MEAT_SELLER"
     ],
@@ -139,6 +151,8 @@
     "name": "ALC",
     "position": "MEAT_SELLER",
     "domain": "MEAT",
+    "vacation" : [
+    ],
     "skills": [
       "MEAT_SELLER"
     ],
@@ -173,6 +187,8 @@
     "name": "SFC",
     "position": "MEAT_SELLER",
     "domain": "MEAT",
+    "vacation" : [
+    ],
     "skills": [
       "MEAT_SELLER"
     ],
@@ -207,6 +223,8 @@
     "name": "AMG",
     "position": "MEAT_SELLER",
     "domain": "MEAT",
+    "vacation" : [
+    ],
     "skills": [
       "MEAT_SELLER"
     ],

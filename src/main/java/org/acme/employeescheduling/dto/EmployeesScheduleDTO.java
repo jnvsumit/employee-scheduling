@@ -13,6 +13,9 @@ public class EmployeesScheduleDTO {
     private String name;
     private String position;
     private String domain;
+    private List<String> vacation;
+
+    private Long id;
 
 
     public String getName() {

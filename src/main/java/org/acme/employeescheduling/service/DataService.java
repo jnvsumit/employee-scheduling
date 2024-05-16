@@ -28,6 +28,9 @@ public class DataService {
         List <Shift> shifts = Main.getShifts(startDate,endDate);
         try {
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
+
+            logger.log(Level.INFO, employeesScheduleDTOS.toString()+".....ABC");
+
             List < Availability> availabilities = Main.generateAvailabilities(employeesScheduleDTOS,startDate,endDate);
             Set<String> domains = new HashSet<>();
             for(Shift shift: shifts){
@@ -57,6 +60,7 @@ public class DataService {
             String data = DataUtil.getDataFromFile("data/employee2.json");
 
             EmployeesScheduleDTO[] scheduleDTOS = JsonUtil.deserialize(data, EmployeesScheduleDTO[].class);
+            logger.log(Level.INFO, Arrays.stream(scheduleDTOS).toList().toString()+"....scheduleDTO");
 
             return Arrays.stream(scheduleDTOS).toList();
 
