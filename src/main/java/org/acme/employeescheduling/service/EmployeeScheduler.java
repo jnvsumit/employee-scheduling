@@ -32,17 +32,46 @@ public class EmployeeScheduler {
     public static List<Shift> assignShifts(List<EmployeesScheduleDTO> employees, List<Shift> shifts) {
 //        logger.log(Level.INFO, "Employees " + employees);
 //        logger.log(Level.INFO, "\n\nShifts " + shifts);
-        List<String> employeeIds = new ArrayList<>();
+        LinkedList<String> employeeIds = new LinkedList<>();
+        String oneShiftEmployeeId="";
+        int firstIndex = 0;
+        int lastIndex = employees.size()-1;
 
         for(EmployeesScheduleDTO employee : employees){
-            employeeIds.add(employee.getId());
+
+            if(employee.getSchedules().size()==1){
+                oneShiftEmployeeId = employee.getId();
+                logger.log(Level.INFO,"------"+oneShiftEmployeeId);
+            }
+            else{
+                employeeIds.add(employee.getId());
+            }
+        }
+
+        for(EmployeesScheduleDTO employee : employees){
+
+            if(employee.getSchedules().size()==1 && Objects.equals(employee.getSchedules().get(0).getStartTime(), "08:00")){
+                employeeIds.addFirst(oneShiftEmployeeId);
+                firstIndex = 1;
+                lastIndex = employees.size()-1;
+                logger.log(Level.INFO,"In morning"+ firstIndex+"firstIndex "+lastIndex+" secondIndex" + employee + "size" + employees.size());
+
+            }
+            if (employee.getSchedules().size()==1 && Objects.equals(employee.getSchedules().get(0).getStartTime(), "15:00")) {
+                employeeIds.add(oneShiftEmployeeId);
+                firstIndex = 0;
+                lastIndex = employees.size()-2;
+
+                logger.log(Level.INFO,"In afternoo "+ firstIndex+"firstIndex "+lastIndex+" secondIndex" + "employee" + employee);
+
+            }
         }
         logger.log(Level.INFO,"Employee Ids" + employeeIds);
+
 
         Map<Integer, List<Shift>> shiftsByWeek = shifts.stream()
                 .collect(Collectors.groupingBy(shift -> shift.getStart().get(WeekFields.of(Locale.getDefault()).weekOfYear())));
         List<List<Shift>> shiftsByWeekList = new ArrayList<>(shiftsByWeek.values());
-
 
         for(List<Shift> weekShifts: shiftsByWeekList){
 
@@ -62,7 +91,9 @@ public class EmployeeScheduler {
                     logger.log(Level.INFO,"Shift---->" + weekShifts.get(i) + "\nIndex"+ index);
                 }
 
-                employeeIds = rightShift(employeeIds);
+                employeeIds = rightShift(employeeIds, firstIndex, lastIndex);
+
+//                employeeIds = rightShift(employeeIds, secondIndex);
                 logger.log(Level.INFO,"Shifted Ids" + employeeIds);
 
         }
@@ -164,15 +195,51 @@ public class EmployeeScheduler {
 
         return shifts;
     }
-    public static <T> List<T> rightShift(List<T> list) {
-        if (list.size() <= 1) {
-            return list; // No need to shift if the list has 0 or 1 element
+
+    /*public static <T> LinkedList<T> rightShift(LinkedList<T> list, int firstIndex, int lastIndex) {
+        if (list.size() <= 1 || firstIndex >= lastIndex || lastIndex >= list.size() - 1) {
+            return list; // No need to shift if the list has 0 or 1 element,
+            // or if the firstIndex is greater than or equal to the secondIndex,
+            // or if the secondIndex is out of bounds
         }
 
         T lastElement = list.remove(list.size() - 1); // Remove the last element
-        list.add(0, lastElement); // Add the last element at the beginning
+
+        for (int i = lastIndex; i > firstIndex + 1; i--) {
+            T element = list.remove(i);
+            list.add(i, element);
+        }
+
+
+        list.add(firstIndex + 1, lastElement); // Add the last element after the element at firstIndex
+
+        return list;
+    }*/
+    public static <T> LinkedList<T> rightShift(LinkedList<T> list, int index1, int index2) {
+        // Check if the indices are valid
+        if (index1 < 0 || index2 >= list.size() || index1 >= index2) {
+            throw new IllegalArgumentException("Invalid indices");
+        }
+
+        // Calculate the number of elements to rotate
+        int rotateAmount = index2 - index1 + 1;
+
+        // Extract the sublist to be rotated
+        LinkedList<T> sublist = new LinkedList<>(list.subList(index1, index2 + 1));
+
+        // Perform the rotation
+        Collections.rotate(sublist, 1);
+
+        // Update the original list with the rotated sublist
+        ListIterator<T> iterator = list.listIterator(index1);
+        for (T element : sublist) {
+            iterator.next();
+            iterator.set(element);
+        }
 
         return list;
     }
+
+
 
 }
