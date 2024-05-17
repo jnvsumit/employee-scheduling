@@ -10,12 +10,13 @@ import java.util.Set;
 @Data
 public class EmployeesScheduleDTO {
 
+    private String id;
     private String name;
     private String position;
     private String domain;
     private List<String> vacation;
 
-    private Long id;
+//    private Long id;
 
 
     public String getName() {

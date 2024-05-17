@@ -9,7 +9,7 @@
         "required_skills": [
           {
             "skill_name": "FRUIT_SELLER",
-            "minimum_employee_count": 2
+            "minimum_employee_count": 3
           }
         ]
       },
@@ -35,7 +35,7 @@
         "required_skills": [
           {
             "skill_name": "MEAT_SELLER",
-            "minimum_employee_count": 2
+            "minimum_employee_count": 3
           }
         ]
       },

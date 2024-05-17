@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
+
+    private String id;
     @PlanningId
     private String name;
 

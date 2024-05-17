@@ -59,9 +59,9 @@ public class Main {
              LocalDate date = startDate.plusDays(i);
              DayOfWeek dayOfWeek = date.getDayOfWeek();
              String dayOfWeekStr = dayOfWeek.toString();
-             if(Objects.equals(dayOfWeekStr, "SUNDAY")){
-                 continue;
-             }
+//             if(Objects.equals(dayOfWeekStr, "SUNDAY")){
+//                 continue;
+//             }
              allShifts.addAll(generateShiftsForDay(stores,date,dayOfWeekStr));
          }
          AtomicInteger countShift = new AtomicInteger();

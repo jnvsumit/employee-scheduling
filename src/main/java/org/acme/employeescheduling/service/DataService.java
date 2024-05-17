@@ -11,10 +11,14 @@ import org.acme.employeescheduling.utils.DataUtil;
 import org.acme.employeescheduling.utils.JsonUtil;
 import org.acme.employeescheduling.service.Main;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.WeekFields;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static io.quarkus.arc.impl.UncaughtExceptions.LOGGER;
 
@@ -26,10 +30,12 @@ public class DataService {
     public EmployeeSchedule getEmployeeSchedule(LocalDate startDate, LocalDate endDate) {
 
         List <Shift> shifts = Main.getShifts(startDate,endDate);
+
+
         try {
             List<EmployeesScheduleDTO> employeesScheduleDTOS = getEmployeeSchedules();
 
-            logger.log(Level.INFO, employeesScheduleDTOS.toString()+".....ABC");
+//            logger.log(Level.INFO, employeesScheduleDTOS.toString()+".....ABC");
 
             List < Availability> availabilities = Main.generateAvailabilities(employeesScheduleDTOS,startDate,endDate);
             Set<String> domains = new HashSet<>();
@@ -39,15 +45,30 @@ public class DataService {
 //            logger.log(Level.INFO,domains.toString());
             List<Shift> finalShifts = new LinkedList<>();
             for(String domain: domains){
+                List<Shift> domainWiseshift = filterShiftsByDomain(shifts,domain);
 
-                finalShifts.addAll(EmployeeScheduler.assignShifts(filterEmployeeByDomain(employeesScheduleDTOS,domain),
-                        filterShiftsByDomain(shifts,domain)));
-//                logger.log(Level.INFO,"\n\n"+finalShifts.toString()+"\n\n\n");
+                AtomicInteger countShift = new AtomicInteger();
+                domainWiseshift.forEach(s -> s.setId(Integer.toString(countShift.getAndIncrement())));
 
+                List<EmployeesScheduleDTO> domainBasedEmployees = filterEmployeeByDomain(employeesScheduleDTOS,domain);
+                AtomicInteger countShift2 = new AtomicInteger();
+                domainBasedEmployees.forEach(s -> s.setId(Integer.toString(countShift2.getAndIncrement())));
+
+                finalShifts.addAll(EmployeeScheduler.assignShifts(domainBasedEmployees,
+                        domainWiseshift));
             }
-//            List<ShiftDTO> shiftDTOS = getShifts();
-//            List<Shift> assignedShifts = EmployeeScheduler.assignShifts(employeesScheduleDTOS,shifts);
-            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, finalShifts,availabilities);
+
+            List<Shift> filteredShifts = new ArrayList<>();
+            for (Shift shift : shifts) {
+                if (!shift.getDay().equals("SUNDAY")) {
+                    filteredShifts.add(shift);
+                }
+            }
+            AtomicInteger countShift = new AtomicInteger();
+            filteredShifts.forEach(s -> s.setId(Integer.toString(countShift.getAndIncrement())));
+
+
+            return EmployeesScheduleMapper.toEmployeeSchedule(employeesScheduleDTOS, filteredShifts,availabilities);
 //            return null;
         } catch (Exception e) {
             LOGGER.error("Something went wrong", e);
@@ -60,7 +81,7 @@ public class DataService {
             String data = DataUtil.getDataFromFile("data/employee2.json");
 
             EmployeesScheduleDTO[] scheduleDTOS = JsonUtil.deserialize(data, EmployeesScheduleDTO[].class);
-            logger.log(Level.INFO, Arrays.stream(scheduleDTOS).toList().toString()+"....scheduleDTO");
+//            logger.log(Level.INFO, Arrays.stream(scheduleDTOS).toList().toString()+"....scheduleDTO");
 
             return Arrays.stream(scheduleDTOS).toList();
 
@@ -89,6 +110,7 @@ public class DataService {
                 filteredEmployees.add(employee);
             }
         }
+//        logger.log(Level.INFO,"Employees of domain "+domain + " "+ filteredEmployees);
         return filteredEmployees;
     }
 
@@ -99,6 +121,7 @@ public class DataService {
                 filteredShifts.add(shift);
             }
         }
+//        logger.log(Level.INFO,"Shifts of domain "+domain + " "+ filteredShifts);
         return filteredShifts;
     }
 
