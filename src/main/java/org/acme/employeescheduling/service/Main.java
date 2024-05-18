@@ -36,6 +36,29 @@ public class Main {
 
     }
 
+    public static List<Shift> getShifts(LocalDate startDate, LocalDate endDate, String data){
+        Gson gson = new Gson();
+        Type storeListType = new TypeToken<List<DepartmentDTO>>() {}.getType();
+        List<DepartmentDTO> storeDTOs = gson.fromJson(data, storeListType);
+
+        List<Department> stores = mapToStores(storeDTOs);
+
+        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+
+        List<Shift> allShifts = new LinkedList<>();
+        for(int i=0;i<=daysBetween;i++){
+
+            LocalDate date = startDate.plusDays(i);
+            DayOfWeek dayOfWeek = date.getDayOfWeek();
+            String dayOfWeekStr = dayOfWeek.toString();
+            allShifts.addAll(generateShiftsForDay(stores,date,dayOfWeekStr));
+        }
+        AtomicInteger countShift = new AtomicInteger();
+        allShifts.forEach(s -> s.setId(Integer.toString(countShift.getAndIncrement())));
+
+        return allShifts;
+    }
+
      public static List<Shift> getShifts(LocalDate startDate, LocalDate endDate ){
          String jsonData = null;
          try {

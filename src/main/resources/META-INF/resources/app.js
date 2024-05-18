@@ -373,7 +373,7 @@ function renderSchedule(schedule) {
 }
 
 function solve() {
-  console.log({ startDate, endDate });
+
   if (!startDate || !endDate) {
     swal({
       title: "Error!",
@@ -381,22 +381,40 @@ function solve() {
       type: "error",
       confirmButtonText: "Got it!",
     });
-  } else {
-    if (!loadedSchedule) {
-      loadedSchedule = { startDate, endDate };
-    } else {
-      loadedSchedule.startDate = startDate;
-      loadedSchedule.endDate = endDate;
-    }
-    $.post("/schedules", JSON.stringify(loadedSchedule), function (data) {
-      scheduleId = data;
-      refreshSolvingButtons(true);
-    }).fail(function (xhr, ajaxOptions, thrownError) {
-      showError("Start solving failed.", xhr);
-      refreshSolvingButtons(false);
-    }, "text");
+    return;
   }
+
+  const employeeFileInput = document.getElementById("employeeFile");
+  const storeFileInput = document.getElementById("storeFile");
+
+  if (!employeeFileInput.files.length || !storeFileInput.files.length) {
+    swal({
+      title: "Error!",
+      text: "Please select both employee and store files",
+      type: "error",
+      confirmButtonText: "Got it!",
+    });
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("employeeFile", employeeFileInput.files[0]);
+  formData.append("employeeFileName", employeeFileInput.files[0].name);
+  formData.append("storeFile", storeFileInput.files[0]);
+  formData.append("storeFileName", storeFileInput.files[0].name);
+
+  axios.post(`/schedules?start_date=${startDate}&end_date=${endDate}`, formData)
+      .then(response => {
+        const data = response.data;
+        scheduleId = data;
+        refreshSolvingButtons(true);
+      })
+      .catch(error => {
+        showError("Start solving failed.", error.response);
+        refreshSolvingButtons(false);
+      });
 }
+
 
 function publish() {
   $.post(`/schedules/${scheduleId}/publish`, function () {

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/webjars/timefold/css/timefold-webui.css" />
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
       .vis-time-axis .vis-grid.vis-saturday,
       .vis-time-axis .vis-grid.vis-sunday {
@@ -57,6 +58,11 @@
               <label for="endDate">End Date :</label>
               <input id="endDate" type="date" placeholder="Choose end date" required />
             </div>
+            <form id="solveForm">
+              Employee File: <input type="file" id="employeeFile" />
+              Store File: <input type="file" id="storeFile" />
+              <button type="button" onclick="solve()">Solve</button>
+            </form>
           </div>
           <button id="solveButton" type="button" class="btn btn-success">
             <span class="fas fa-play"></span> Generate Schedule

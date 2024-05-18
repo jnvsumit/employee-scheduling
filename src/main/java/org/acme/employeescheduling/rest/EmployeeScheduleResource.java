@@ -1,5 +1,9 @@
 package org.acme.employeescheduling.rest;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.UUID;
@@ -21,6 +25,7 @@ import ai.timefold.solver.core.api.solver.SolverStatus;
 
 import org.acme.employeescheduling.domain.EmployeeSchedule;
 import org.acme.employeescheduling.domain.ScheduleState;
+import org.acme.employeescheduling.dto.SolveScheduleBodyDTO;
 import org.acme.employeescheduling.rest.exception.EmployeeScheduleSolverException;
 import org.acme.employeescheduling.rest.exception.ErrorInfo;
 import org.acme.employeescheduling.service.DataService;
@@ -32,6 +37,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,18 +89,17 @@ public class EmployeeScheduleResource {
                     description = "The job ID. Use that ID to get the solution with the other methods.",
                     content = @Content(mediaType = MediaType.TEXT_PLAIN, schema = @Schema(implementation = String.class))) })
     @POST
-    @Consumes({ MediaType.APPLICATION_JSON })
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.TEXT_PLAIN)
-    public String solve(String payload) throws JsonProcessingException {
-        JsonNode jsonNode = objectMapper.readTree(payload);
+    public String solve(@QueryParam("start_date") final String startDateStr, @QueryParam("end_date") final String endDateStr,  @MultipartForm SolveScheduleBodyDTO data) {
+        LocalDate startDate = LocalDate.parse(startDateStr);
+        LocalDate endDate = LocalDate.parse(endDateStr);
 
-        String startDateString = jsonNode.get("startDate").asText();
-        String endDateString = jsonNode.get("endDate").asText();
+        String employeeFileContent = dataService.getFileContent(data.getEmployeeFile());
+        String storeFileContent = dataService.getFileContent(data.getStoreFile());
 
+        EmployeeSchedule problem = dataService.getEmployeeSchedule(startDate, endDate, employeeFileContent, storeFileContent);
 
-        LocalDate startDate = LocalDate.parse(startDateString);
-        LocalDate endDate = LocalDate.parse(endDateString);
-        EmployeeSchedule problem = dataService.getEmployeeSchedule(startDate,endDate);
         String jobId = UUID.randomUUID().toString();
         jobIdToJob.put(jobId, Job.ofSchedule(problem));
         solverManager.solveBuilder()
